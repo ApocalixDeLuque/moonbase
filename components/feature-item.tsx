@@ -11,7 +11,7 @@ interface FeatureItemProps {
 
 export default function FeatureItem({ feature, description, included = true, value }: FeatureItemProps) {
   // Function to safely get string value
-  const safeString = (val: any): string => {
+  const safeString = (val: unknown): string => {
     if (typeof val !== 'string') return '';
     return val.replace(/\[object Object\]/g, '').trim();
   };
