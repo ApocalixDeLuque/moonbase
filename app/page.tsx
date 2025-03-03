@@ -566,7 +566,7 @@ export default function PricingPage() {
 
         {/* Extra Features Section */}
         <section className="container mx-auto px-4 py-12">
-          <div className="flex flex-col md:flex-row md:items-center items-start justify-between bg-[#1A1A1A]/30 border border-[#7D5683] rounded-2xl p-8 md:p-12 max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center items-start justify-between bg-[#271E40] border border-[#7D5683] rounded-2xl p-8 md:p-12 max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-[#DADFFE] mb-8 md:mb-0">Disfruta todo esto. Sin costo extra.</h2>
             <div className="grid md:grid-cols-2 md:gap-8 gap-6">
               <div className="space-y-6">
