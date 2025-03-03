@@ -2,23 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tema Starlit (Cielo Estrellado) */
+:root[data-theme="starlit"] {
+  --background: 249 59% 13%; /* #140E36 */
+  --background-secondary: 0 0% 10%; /* #1A1A1A */
+  --background-overlay: 251 60% 5%; /* #0D0923 */
+  --foreground: 227 100% 93%; /* #DADFFE */
+  --foreground-secondary: 227 100% 85%; /* #B5C7FF */
+  --accent: 292 21% 45%; /* #7D5683 */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --accent-secondary: 225 100% 85%; /* #B5C7FF */
+  --accent-secondary-foreground: 249 59% 13%; /* #140E36 */
+  --muted: 0 0% 10%; /* #1A1A1A */
+  --muted-foreground: 232 95% 93%; /* #DADFFE */
+  --border: 292 21% 45%; /* #7D5683 */
+  --input: 292 21% 45%; /* #7D5683 */
+  --ring: 292 21% 45%; /* #7D5683 */
+  --radius: 0.75rem;
+}
+
+/* Tema Midnight (Media Noche) */
+:root[data-theme="midnight"] {
+  --background: 240 20% 5%; /* #0A0A0D */
+  --background-secondary: 240 20% 8%; /* #111114 */
+  --background-overlay: 240 20% 3%; /* #060608 */
+  --foreground: 232 95% 93%; /* #DADFFE */
+  --foreground-secondary: 225 100% 85%; /* #B5C7FF */
+  --accent: 283 21% 35%; /* #5D3E61 */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --accent-secondary: 227 100% 75%; /* #A5B7EF */
+  --accent-secondary-foreground: 240 20% 5%; /* #0A0A0D */
+  --muted: 240 20% 8%; /* #111114 */
+  --muted-foreground: 232 95% 93%; /* #DADFFE */
+  --border: 283 21% 35%; /* #5D3E61 */
+  --input: 283 21% 35%; /* #5D3E61 */
+  --ring: 283 21% 35%; /* #5D3E61 */
+  --radius: 0.75rem;
+}
+
+/* Por defecto usar el tema Starlit */
 :root {
   --background: 251 60% 13%;
+  --background-secondary: 0 0% 10%;
+  --background-overlay: 251 60% 5%;
   --foreground: 227 100% 93%;
-  --card: 251 60% 13%;
-  --card-foreground: 227 100% 93%;
-  --popover: 251 60% 13%;
-  --popover-foreground: 227 100% 93%;
-  --primary: 283 21% 45%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 227 100% 85%;
-  --secondary-foreground: 251 60% 13%;
+  --foreground-secondary: 227 100% 85%;
+  --accent: 283 21% 45%;
+  --accent-foreground: 0 0% 100%;
+  --accent-secondary: 227 100% 85%;
+  --accent-secondary-foreground: 251 60% 13%;
   --muted: 0 0% 10%;
   --muted-foreground: 227 100% 93%;
-  --accent: 227 100% 85%;
-  --accent-foreground: 251 60% 13%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 227 100% 93%;
   --border: 283 21% 45%;
   --input: 283 21% 45%;
   --ring: 283 21% 45%;
@@ -29,5 +63,14 @@
   html, body {
     font-size: 14px;
   }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Utilidades para transiciones de tema */
+.theme-transition {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 

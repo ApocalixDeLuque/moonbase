@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
+import ThemeSelector from "./theme-selector"
 
 export default function Navbar() {
   // Initialize showFullMenu as true so the full logo shows on page load
@@ -52,7 +53,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#0D0923]/90 backdrop-blur-sm shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-background-overlay/90 backdrop-blur-sm shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -96,35 +97,42 @@ export default function Navbar() {
               showFullMenu ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Portafolio
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Contacto
             </Link>
           </div>
 
-          <div
-            className={`hidden md:block transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}
-          >
-            <button className="py-2 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
-              Cotizar Proyecto
-            </button>
-          </div>
+          <div className="flex items-center gap-4">
+            <div
+              className={`hidden md:block transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}
+            >
+              <button className="py-2 px-4 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors">
+                Cotizar Proyecto
+              </button>
+            </div>
 
-          <div className="md:hidden">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-[#DADFFE] p-2">
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Theme Selector */}
+            <div className={`transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}>
+              <ThemeSelector />
+            </div>
+
+            <div className="md:hidden">
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-foreground p-2">
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -135,22 +143,22 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-col space-y-4">
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Portafolio
             </Link>
-            <Link href="#" className="text-[#DADFFE] hover:text-[#B5C7FF] font-medium transition-colors">
+            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Contacto
             </Link>
-            <button className="py-2 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors w-full">
+            <button className="py-2 px-4 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors w-full">
               Cotizar Proyecto
             </button>
           </div>
