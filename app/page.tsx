@@ -276,7 +276,7 @@ const standardFeatures = [
 
 export default function PricingPage() {
   const [paymentPlan, setPaymentPlan] = useState<"contado" | "3msi" | "6msi" | "9msi" | "12msi">("contado");
-  
+
   // New pricing structure
   const pricingData = {
     basic: {
@@ -320,7 +320,7 @@ export default function PricingPage() {
     const totalPrice = pricingData[mappedPlan][paymentPlan];
     const months = paymentPlan === "contado" ? 1 : parseInt(paymentPlan.replace("msi", ""));
     const monthlyPayment = getMonthlyPayment(plan);
-    
+
     return {
       monthly: monthlyPayment,
       total: totalPrice,
@@ -357,7 +357,7 @@ export default function PricingPage() {
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
               Soluciones web profesionales diseñadas para impulsar el crecimiento de tu negocio
             </p>
-            
+
             {/* Payment options selector */}
             <div className="mt-8 flex justify-center">
               <Select
@@ -384,8 +384,8 @@ export default function PricingPage() {
           {/* Payment notice banner */}
           {/* <div className="bg-[#271E40] p-4 rounded-lg max-w-6xl mx-auto mb-8 text-center border border-[#7D5683]/40">
             <p className="text-[#B5C7FF] font-medium">
-              {paymentPlan === "contado" 
-                ? "Todos nuestros planes incluyen dominio gratuito por un año y certificado SSL" 
+              {paymentPlan === "contado"
+                ? "Todos nuestros planes incluyen dominio gratuito por un año y certificado SSL"
                 : `Plan de pagos a ${paymentPlan.replace('msi', '')} meses`}
             </p>
           </div> */}
@@ -566,8 +566,8 @@ export default function PricingPage() {
 
         {/* Extra Features Section */}
         <section className="container mx-auto px-4 py-12">
-          <div className="flex flex-col md:flex-row md:items-center items-start justify-between bg-[#271E40] border border-[#7D5683] rounded-2xl p-8 md:p-12 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-[#DADFFE] mb-8 md:mb-0">Disfruta todo esto. Sin costo extra.</h2>
+          <div className="flex flex-col md:flex-row md:items-center items-start justify-between bg-enjoy-card border border-[#7D5683] rounded-2xl p-8 md:p-12 max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#DADFFE] mb-8 md:mb-0 mr-0 md:mr-4">Disfruta todo esto. Sin costo extra.</h2>
             <div className="grid md:grid-cols-2 md:gap-8 gap-6">
               <div className="space-y-6">
                 <div className="flex items-center gap-3">

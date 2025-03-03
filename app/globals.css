@@ -19,6 +19,7 @@
   --input: 292 21% 45%; /* #7D5683 */
   --ring: 292 21% 45%; /* #7D5683 */
   --radius: 0.75rem;
+  --enjoy-card: 256 36% 18%; /* #271E40*/
 }
 
 /* Tema Midnight (Media Noche) */
@@ -38,6 +39,7 @@
   --input: 283 21% 35%; /* #5D3E61 */
   --ring: 283 21% 35%; /* #5D3E61 */
   --radius: 0.75rem;
+  --enjoy-card: 0 0% 10%;
 }
 
 /* Por defecto usar el tema Starlit */
