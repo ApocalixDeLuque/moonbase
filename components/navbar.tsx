@@ -94,7 +94,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div
             className={`hidden md:flex items-center space-x-8 transition-opacity duration-300 ${
-              showFullMenu ? "opacity-100" : "opacity-0"
+              showFullMenu ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
             <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
@@ -114,17 +114,11 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            <div
-              className={`hidden md:block transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}
-            >
-              <button className="py-2 px-4 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors">
+            {/* Botón de Cotizar siempre visible */}
+            <div className="hidden md:block">
+              <button className="py-2 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                 Cotizar Proyecto
               </button>
-            </div>
-
-            {/* Theme Selector */}
-            <div className={`transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}>
-              <ThemeSelector />
             </div>
 
             <div className="md:hidden">
@@ -165,4 +159,4 @@ export default function Navbar() {
       </div>
     </nav>
   )
-} 
+}
