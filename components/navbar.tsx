@@ -34,7 +34,7 @@ export default function Navbar() {
       // Set a new timer to show the full menu after 3 seconds of no scrolling
       scrollTimer.current = setTimeout(() => {
         setShowFullMenu(true)
-      }, 3000)
+      }, 20000)
     }
 
     window.addEventListener("scroll", handleScroll, {
@@ -113,9 +113,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div
-            className={`hidden md:block transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}
-          >
+          <div className="hidden md:block">
             <button className="py-2 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
               Cotizar Proyecto
             </button>
