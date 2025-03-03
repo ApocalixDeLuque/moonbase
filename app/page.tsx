@@ -5,6 +5,13 @@ import Image from "next/image"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import FeatureItem from "@/components/feature-item"
 import FeatureList from "@/components/feature-list"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 // Define standard features for all packages
 const standardFeatures = [
@@ -265,58 +272,63 @@ const standardFeatures = [
 ]
 
 export default function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState<"en_plazos" | "anual">("anual")
-
-  // Calculate prices with the fixed values provided
-  const getPriceInfo = (planType: 'starter' | 'business' | 'enterprise') => {
-    // Fixed prices for each plan
-    const prices = {
-      starter: {
-        annual: 5999,
-        initialPayment: 3000,
-        monthlyInstallment: 550,
-        totalPayments: 7950
-      },
-      business: {
-        annual: 9999,
-        initialPayment: 5000,
-        monthlyInstallment: 915,
-        totalPayments: 13235
-      },
-      enterprise: {
-        annual: 15999,
-        initialPayment: 8000,
-        monthlyInstallment: 1475,
-        totalPayments: 21275
-      }
-    };
-    
-    const planPrices = prices[planType];
-    
-    if (billingCycle === "anual") {
-      return {
-        monthly: Math.round(planPrices.annual / 12), // Monthly equivalent for display
-        total: planPrices.annual,
-        deposit: 0,
-        months: 12,
-        currency: "MXN",
-        savingsPercent: Math.round(((planPrices.totalPayments - planPrices.annual) / planPrices.annual) * 100)
-      }
+  const [paymentPlan, setPaymentPlan] = useState<"contado" | "3msi" | "6msi" | "9msi" | "12msi">("contado");
+  
+  // New pricing structure
+  const pricingData = {
+    basic: {
+      contado: 5999,
+      "3msi": 6499,
+      "6msi": 6699,
+      "9msi": 6899,
+      "12msi": 7199
+    },
+    standard: {
+      contado: 9999,
+      "3msi": 10699,
+      "6msi": 11099,
+      "9msi": 11499,
+      "12msi": 11899
+    },
+    premium: {
+      contado: 15999,
+      "3msi": 17099,
+      "6msi": 17699,
+      "9msi": 18299,
+      "12msi": 18999
     }
+  };
+
+  const planMapping = {
+    starter: 'basic',
+    business: 'standard',
+    enterprise: 'premium'
+  } as const;
+
+  const getMonthlyPayment = (plan: "starter" | "business" | "enterprise") => {
+    const mappedPlan = planMapping[plan];
+    const totalPrice = pricingData[mappedPlan][paymentPlan];
+    const months = paymentPlan === "contado" ? 1 : parseInt(paymentPlan.replace("msi", ""));
+    return Math.round(totalPrice / months);
+  };
+
+  const getPlanDetails = (plan: "starter" | "business" | "enterprise") => {
+    const mappedPlan = planMapping[plan];
+    const totalPrice = pricingData[mappedPlan][paymentPlan];
+    const months = paymentPlan === "contado" ? 1 : parseInt(paymentPlan.replace("msi", ""));
+    const monthlyPayment = getMonthlyPayment(plan);
     
-    // For payment plan
     return {
-      monthly: planPrices.monthlyInstallment,
-      total: planPrices.totalPayments,
-      deposit: planPrices.initialPayment,
-      months: 9,
-      currency: "MXN"
-    }
-  }
+      monthly: monthlyPayment,
+      total: totalPrice,
+      months: months,
+      currency: "MXN",
+    };
+  };
 
-  const starterPrice = getPriceInfo('starter')
-  const businessPrice = getPriceInfo('business')
-  const enterprisePrice = getPriceInfo('enterprise')
+  const starterPrice = getPlanDetails('starter')
+  const businessPrice = getPlanDetails('business')
+  const enterprisePrice = getPlanDetails('enterprise')
 
   // Ordenar características: primero las incluidas, luego las no incluidas
   const sortFeaturesByInclusion = (features: typeof standardFeatures, plan: 'starter' | 'business' | 'enterprise') => {
@@ -336,75 +348,55 @@ export default function PricingPage() {
       <TooltipProvider delayDuration={0}>
         {/* Header */}
         <header className="container mx-auto px-4 py-12">
-          <div className="flex justify-center mb-8">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NS-Marca%20oficial_blanco-3HrsmBrLXqfzV9vyLY30gu2JHLA33b.png"
-              alt="Nightly Software"
-              width={300}
-              height={100}
-              className="h-16 w-auto"
-            />
-          </div>
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-[#B5C7FF] mb-4">Planes de Precios</h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
               Soluciones web profesionales diseñadas para impulsar el crecimiento de tu negocio
             </p>
-            <div className="mt-8 inline-flex items-center p-1 bg-[#1A1A1A]/30 rounded-lg">
-              <button
-                onClick={() => setBillingCycle("en_plazos")}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
-                  billingCycle === "en_plazos" ? "bg-[#7D5683] text-white" : "text-[#DADFFE] hover:text-white"
-                }`}
+            
+            {/* Payment options selector */}
+            <div className="mt-8 flex justify-center">
+              <Select
+                value={paymentPlan}
+                onValueChange={(value) => setPaymentPlan(value as "contado" | "3msi" | "6msi" | "9msi" | "12msi")}
               >
-                Plan de pagos
-              </button>
-              <button
-                onClick={() => setBillingCycle("anual")}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
-                  billingCycle === "anual" ? "bg-[#7D5683] text-white" : "text-[#DADFFE] hover:text-white"
-                }`}
-              >
-                Pago único (Ahorra hasta 33%)
-              </button>
+                <SelectTrigger className="w-[200px] text-lg p-6 bg-[#1A1A1A]/30 border-[#7D5683]/30 text-[#DADFFE] focus:ring-[#7D5683]">
+                  <SelectValue placeholder="Selecciona un plan de pago" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#1A1A1A] border-[#7D5683]/30">
+                  <SelectItem value="12msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Plan a 12 meses</SelectItem>
+                  <SelectItem value="9msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Plan a 9 meses</SelectItem>
+                  <SelectItem value="6msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Plan a 6 meses</SelectItem>
+                  <SelectItem value="3msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Plan a 3 meses</SelectItem>
+                  <SelectItem value="contado" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Pago único</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </header>
 
         {/* Pricing Cards */}
         <section className="container mx-auto px-4 pb-12 pt-6">
-          {/* Payment notice banner - always visible with conditional content */}
-          <div className="bg-[#271E40] p-4 rounded-lg max-w-6xl mx-auto mb-8 text-center border border-[#7D5683]/40">
-            {billingCycle === "en_plazos" ? (
-              <p className="text-[#B5C7FF] font-medium">
-                Todos los planes requieren un pago inicial de <span className="font-bold">$3,000 MXN</span>, seguido de 9 mensualidades del monto mostrado
-              </p>
-            ) : (
-              <p className="text-[#B5C7FF] font-medium">
-                Todos nuestros planes incluyen <span className="font-bold">dominio gratuito</span> por un año y <span className="font-bold">certificado SSL</span>
-              </p>
-            )}
-          </div>
-          
+          {/* Payment notice banner */}
+          {/* <div className="bg-[#271E40] p-4 rounded-lg max-w-6xl mx-auto mb-8 text-center border border-[#7D5683]/40">
+            <p className="text-[#B5C7FF] font-medium">
+              {paymentPlan === "contado" 
+                ? "Todos nuestros planes incluyen dominio gratuito por un año y certificado SSL" 
+                : `Plan de pagos a ${paymentPlan.replace('msi', '')} meses`}
+            </p>
+          </div> */}
+
+          {/* Pricing cards grid */}
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* Starter Package */}
             <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 transition-all hover:shadow-xl hover:shadow-[#7D5683]/10 relative mt-10">
-              <div className="absolute top-3 right-3">
-                <div className="bg-[#6A53FF]/20 text-[#B5C7FF] font-medium text-xs rounded-full px-3 py-1">
-                  AHORRA {billingCycle === "anual" ? "32%" : "0%"}
-                </div>
-              </div>
+              {/* Package content */}
               <div className="p-6 border-b border-[#7D5683]/20 flex flex-col">
                 <h2 className="text-2xl font-bold mb-2">Paquete Inicial</h2>
                 <p className="text-[#DADFFE]/70 mb-6 flex-grow">
                   Presencia web profesional y atractiva para lanzar tu negocio al mundo digital con todas las funciones esenciales.
                 </p>
                 <div className="flex flex-col mb-6">
-                  {billingCycle === "anual" && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[#DADFFE]/50 line-through text-lg">$8,999 MXN</span>
-                    </div>
-                  )}
                   <div className="flex items-end gap-1">
                     <span className="text-4xl font-bold text-[#B5C7FF]">${starterPrice.monthly}</span>
                     <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
@@ -413,11 +405,13 @@ export default function PricingPage() {
                 <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                   Comenzar
                 </button>
-                {billingCycle === "anual" ? (
-                  <p className="text-center text-sm mt-2 text-[#B5C7FF]">Facturado como ${starterPrice.total} MXN/año</p>
+                {paymentPlan !== "contado" ? (
+                  <p className="text-center text-sm mt-2 text-[#B5C7FF]">
+                    Total: ${starterPrice.total} MXN ({starterPrice.months} pagos)
+                  </p>
                 ) : (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
-                    + ${starterPrice.monthly} MXN/mes por {starterPrice.months} meses
+                    Pago único de ${starterPrice.total} MXN
                   </p>
                 )}
               </div>
@@ -438,14 +432,14 @@ export default function PricingPage() {
             </div>
 
             {/* Business Package */}
-            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 relative transition-all hover:shadow-xl hover:shadow-[#7D5683]/20">
+            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683] relative transition-all hover:shadow-xl hover:shadow-[#7D5683]/20">
               {/* Popular badge */}
               <div className="w-full bg-[#7D5683] text-white py-2 text-center font-medium">
                 MÁS POPULAR
               </div>
               <div className="absolute top-[46px] right-3">
                 <div className="bg-[#6A53FF]/20 text-[#B5C7FF] font-medium text-xs rounded-full px-3 py-1">
-                  AHORRA {billingCycle === "anual" ? "35%" : "0%"}
+                  AHORRA 35%
                 </div>
               </div>
               <div className="p-6 border-b border-[#7D5683]/20 flex flex-col">
@@ -454,11 +448,6 @@ export default function PricingPage() {
                   Solución completa para negocios en crecimiento con herramientas de marketing digital y mayor alcance.
                 </p>
                 <div className="flex flex-col mb-6">
-                  {billingCycle === "anual" && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[#DADFFE]/50 line-through text-lg">$13,999 MXN</span>
-                    </div>
-                  )}
                   <div className="flex items-end gap-1">
                     <span className="text-4xl font-bold text-[#B5C7FF]">${businessPrice.monthly}</span>
                     <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
@@ -467,11 +456,13 @@ export default function PricingPage() {
                 <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                   Comenzar
                 </button>
-                {billingCycle === "anual" ? (
-                  <p className="text-center text-sm mt-2 text-[#B5C7FF]">Facturado como ${businessPrice.total} MXN/año</p>
+                {paymentPlan !== "contado" ? (
+                  <p className="text-center text-sm mt-2 text-[#B5C7FF]">
+                    Total: ${businessPrice.total} MXN ({businessPrice.months} pagos)
+                  </p>
                 ) : (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
-                    + ${businessPrice.monthly} MXN/mes por {businessPrice.months} meses
+                    Pago único de ${businessPrice.total} MXN
                   </p>
                 )}
               </div>
@@ -495,7 +486,7 @@ export default function PricingPage() {
             <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 transition-all hover:shadow-xl hover:shadow-[#7D5683]/10 relative mt-10">
               <div className="absolute top-3 right-3">
                 <div className="bg-[#6A53FF]/20 text-[#B5C7FF] font-medium text-xs rounded-full px-3 py-1">
-                  AHORRA {billingCycle === "anual" ? "38%" : "0%"}
+                  AHORRA 38%
                 </div>
               </div>
               <div className="p-6 border-b border-[#7D5683]/20 flex flex-col">
@@ -504,11 +495,6 @@ export default function PricingPage() {
                   Experiencia digital completa con e-commerce, integraciones avanzadas y funcionalidades premium para empresas establecidas.
                 </p>
                 <div className="flex flex-col mb-6">
-                  {billingCycle === "anual" && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[#DADFFE]/50 line-through text-lg">$22,999 MXN</span>
-                    </div>
-                  )}
                   <div className="flex items-end gap-1">
                     <span className="text-4xl font-bold text-[#B5C7FF]">${enterprisePrice.monthly}</span>
                     <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
@@ -517,11 +503,13 @@ export default function PricingPage() {
                 <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                   Comenzar
                 </button>
-                {billingCycle === "anual" ? (
-                  <p className="text-center text-sm mt-2 text-[#B5C7FF]">Facturado como ${enterprisePrice.total} MXN/año</p>
+                {paymentPlan !== "contado" ? (
+                  <p className="text-center text-sm mt-2 text-[#B5C7FF]">
+                    Total: ${enterprisePrice.total} MXN ({enterprisePrice.months} pagos)
+                  </p>
                 ) : (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
-                    + ${enterprisePrice.monthly} MXN/mes por {enterprisePrice.months} meses
+                    Pago único de ${enterprisePrice.total} MXN
                   </p>
                 )}
               </div>
@@ -554,7 +542,7 @@ export default function PricingPage() {
               />
               <FaqItem
                 question="¿Puedo actualizar mi paquete más adelante?"
-                answer="¡Absolutamente! Puedes actualizar tu paquete en cualquier momento a medida que tu negocio crece. Calcularemos la diferencia prorrateada y la aplicaremos a tu nuevo plan sin complicaciones."
+                answer="¡Por supuesto! Puedes actualizar tu paquete en cualquier momento a medida que tu negocio crece. Calcularemos la diferencia prorrateada y la aplicaremos a tu nuevo plan sin complicaciones."
               />
               <FaqItem
                 question="¿Qué sucede después de que expire mi año gratuito de dominio?"
