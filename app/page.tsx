@@ -372,18 +372,43 @@ export default function PricingPage() {
         </header>
 
         {/* Pricing Cards */}
-        <section className="container mx-auto px-4 py-12">
+        <section className="container mx-auto px-4 pb-12 pt-6">
+          {/* Payment notice banner - always visible with conditional content */}
+          <div className="bg-[#271E40] p-4 rounded-lg max-w-6xl mx-auto mb-8 text-center border border-[#7D5683]/40">
+            {billingCycle === "en_plazos" ? (
+              <p className="text-[#B5C7FF] font-medium">
+                Todos los planes requieren un pago inicial de <span className="font-bold">$3,000 MXN</span>, seguido de 9 mensualidades del monto mostrado
+              </p>
+            ) : (
+              <p className="text-[#B5C7FF] font-medium">
+                Todos nuestros planes incluyen <span className="font-bold">dominio gratuito</span> por un año y <span className="font-bold">certificado SSL</span>
+              </p>
+            )}
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* Starter Package */}
-            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 transition-all hover:shadow-xl hover:shadow-[#7D5683]/10">
-              <div className="p-6 border-b border-[#7D5683]/20 h-[320px] flex flex-col">
+            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 transition-all hover:shadow-xl hover:shadow-[#7D5683]/10 relative mt-10">
+              <div className="absolute top-3 right-3">
+                <div className="bg-[#6A53FF]/20 text-[#B5C7FF] font-medium text-xs rounded-full px-3 py-1">
+                  AHORRA {billingCycle === "anual" ? "32%" : "0%"}
+                </div>
+              </div>
+              <div className="p-6 border-b border-[#7D5683]/20 flex flex-col">
                 <h2 className="text-2xl font-bold mb-2">Paquete Inicial</h2>
                 <p className="text-[#DADFFE]/70 mb-6 flex-grow">
                   Presencia web profesional y atractiva para lanzar tu negocio al mundo digital con todas las funciones esenciales.
                 </p>
-                <div className="flex items-end gap-1 mb-6">
-                  <span className="text-4xl font-bold text-[#B5C7FF]">${starterPrice.monthly}</span>
-                  <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
+                <div className="flex flex-col mb-6">
+                  {billingCycle === "anual" && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[#DADFFE]/50 line-through text-lg">$8,999 MXN</span>
+                    </div>
+                  )}
+                  <div className="flex items-end gap-1">
+                    <span className="text-4xl font-bold text-[#B5C7FF]">${starterPrice.monthly}</span>
+                    <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
+                  </div>
                 </div>
                 <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                   Comenzar
@@ -392,8 +417,6 @@ export default function PricingPage() {
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">Facturado como ${starterPrice.total} MXN/año</p>
                 ) : (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
-                    Pago inicial de ${starterPrice.deposit} MXN
-                    <br />
                     + ${starterPrice.monthly} MXN/mes por {starterPrice.months} meses
                   </p>
                 )}
@@ -415,18 +438,31 @@ export default function PricingPage() {
             </div>
 
             {/* Business Package */}
-            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border-2 border-[#7D5683] relative transition-all hover:shadow-xl hover:shadow-[#7D5683]/20">
-              <div className="absolute top-0 right-0 bg-[#7D5683] text-white px-4 py-1 font-medium text-sm rounded-bl-lg">
-                Popular
+            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 relative transition-all hover:shadow-xl hover:shadow-[#7D5683]/20">
+              {/* Popular badge */}
+              <div className="w-full bg-[#7D5683] text-white py-2 text-center font-medium">
+                MÁS POPULAR
               </div>
-              <div className="p-6 border-b border-[#7D5683]/20 h-[320px] flex flex-col">
+              <div className="absolute top-[46px] right-3">
+                <div className="bg-[#6A53FF]/20 text-[#B5C7FF] font-medium text-xs rounded-full px-3 py-1">
+                  AHORRA {billingCycle === "anual" ? "35%" : "0%"}
+                </div>
+              </div>
+              <div className="p-6 border-b border-[#7D5683]/20 flex flex-col">
                 <h2 className="text-2xl font-bold mb-2">Paquete Negocio</h2>
                 <p className="text-[#DADFFE]/70 mb-6 flex-grow">
                   Solución completa para negocios en crecimiento con herramientas de marketing digital y mayor alcance.
                 </p>
-                <div className="flex items-end gap-1 mb-6">
-                  <span className="text-4xl font-bold text-[#B5C7FF]">${businessPrice.monthly}</span>
-                  <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
+                <div className="flex flex-col mb-6">
+                  {billingCycle === "anual" && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[#DADFFE]/50 line-through text-lg">$13,999 MXN</span>
+                    </div>
+                  )}
+                  <div className="flex items-end gap-1">
+                    <span className="text-4xl font-bold text-[#B5C7FF]">${businessPrice.monthly}</span>
+                    <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
+                  </div>
                 </div>
                 <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                   Comenzar
@@ -435,8 +471,6 @@ export default function PricingPage() {
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">Facturado como ${businessPrice.total} MXN/año</p>
                 ) : (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
-                    Pago inicial de ${businessPrice.deposit} MXN
-                    <br />
                     + ${businessPrice.monthly} MXN/mes por {businessPrice.months} meses
                   </p>
                 )}
@@ -458,15 +492,27 @@ export default function PricingPage() {
             </div>
 
             {/* Enterprise Package */}
-            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 transition-all hover:shadow-xl hover:shadow-[#7D5683]/10">
-              <div className="p-6 border-b border-[#7D5683]/20 h-[320px] flex flex-col">
+            <div className="bg-[#1A1A1A]/30 rounded-2xl overflow-hidden border border-[#7D5683]/30 transition-all hover:shadow-xl hover:shadow-[#7D5683]/10 relative mt-10">
+              <div className="absolute top-3 right-3">
+                <div className="bg-[#6A53FF]/20 text-[#B5C7FF] font-medium text-xs rounded-full px-3 py-1">
+                  AHORRA {billingCycle === "anual" ? "38%" : "0%"}
+                </div>
+              </div>
+              <div className="p-6 border-b border-[#7D5683]/20 flex flex-col">
                 <h2 className="text-2xl font-bold mb-2">Paquete Empresarial</h2>
                 <p className="text-[#DADFFE]/70 mb-6 flex-grow">
                   Experiencia digital completa con e-commerce, integraciones avanzadas y funcionalidades premium para empresas establecidas.
                 </p>
-                <div className="flex items-end gap-1 mb-6">
-                  <span className="text-4xl font-bold text-[#B5C7FF]">${enterprisePrice.monthly}</span>
-                  <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
+                <div className="flex flex-col mb-6">
+                  {billingCycle === "anual" && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[#DADFFE]/50 line-through text-lg">$22,999 MXN</span>
+                    </div>
+                  )}
+                  <div className="flex items-end gap-1">
+                    <span className="text-4xl font-bold text-[#B5C7FF]">${enterprisePrice.monthly}</span>
+                    <span className="text-[#DADFFE]/70 mb-1">MXN/mes</span>
+                  </div>
                 </div>
                 <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
                   Comenzar
@@ -475,8 +521,6 @@ export default function PricingPage() {
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">Facturado como ${enterprisePrice.total} MXN/año</p>
                 ) : (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
-                    Pago inicial de ${enterprisePrice.deposit} MXN
-                    <br />
                     + ${enterprisePrice.monthly} MXN/mes por {enterprisePrice.months} meses
                   </p>
                 )}
