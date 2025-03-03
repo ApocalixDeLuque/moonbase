@@ -14,6 +14,7 @@ import {
 
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import { Globe, LineChart, Mail, Palette, RefreshCw, Shield } from "lucide-react"
 
 // Define standard features for all packages
 const standardFeatures = [
@@ -563,14 +564,51 @@ export default function PricingPage() {
           </div>
         </section>
 
+        {/* Extra Features Section */}
+        <section className="container mx-auto px-4 py-12">
+          <div className="flex flex-col md:flex-row md:items-center items-start justify-between bg-[#1A1A1A]/30 border border-[#7D5683] rounded-2xl p-8 md:p-12 max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#DADFFE] mb-8 md:mb-0">Disfruta todo esto. Sin costo extra.</h2>
+            <div className="grid md:grid-cols-2 md:gap-8 gap-6">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <Shield className="w-6 h-6 text-[#7D5683]" />
+                  <span className="text-[#DADFFE]">Certificados SSL de seguridad ilimitados</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Palette className="w-6 h-6 text-[#7D5683]" />
+                  <span className="text-[#DADFFE]">Plantillas diseñadas profesionalmente</span>
+                </div>
+                <div className="flex items-center gap-3 text-[#7D5683]">
+                  <Mail className="w-6 h-6 text-[#7D5683]" />
+                  <span className="text-[#DADFFE]">Correos electrónicos profesionales</span>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 text-[#7D5683]">
+                  <Globe className="w-6 h-6 text-[#7D5683]" />
+                  <span className="text-[#DADFFE]">Dominio gratis</span>
+                </div>
+                <div className="flex items-center gap-3 text-[#7D5683]">
+                  <RefreshCw className="w-6 h-6 text-[#7D5683]" />
+                  <span className="text-[#DADFFE]">Copias de seguridad automáticas</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <LineChart className="w-6 h-6 text-[#7D5683]" />
+                  <span className="text-[#DADFFE]">Tráfico web ilimitado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section className="container mx-auto px-4 py-12">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-[#B5C7FF] mb-8 text-center">Preguntas Frecuentes</h2>
             <div className="space-y-6">
               <FaqItem
-                question="¿Para qué es el depósito inicial?"
-                answer="El depósito inicial de 3,000 MXN nos permite comenzar a trabajar en tu proyecto inmediatamente. Este monto cubre los costos iniciales de configuración y asegura nuestro compromiso mutuo con el proyecto."
+                question="¿Qué incluye el paquete inicial?"
+                answer="El paquete inicial incluye todas las características esenciales para establecer tu presencia en línea, como diseño personalizado, dominio gratuito por un año, y soporte técnico."
               />
               <FaqItem
                 question="¿Puedo actualizar mi paquete más adelante?"
@@ -618,12 +656,12 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="border border-[#7D5683]/30 rounded-lg overflow-hidden">
+    <div className="border border-[#7D5683]/50 rounded-lg overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between items-center w-full p-4 text-left font-medium focus:outline-none"
       >
-        <span>{question}</span>
+        <span className="text-[#DADFFE] text-lg font-bold">{question}</span>
         <span className={`transform transition-transform ${isOpen ? "rotate-180" : ""}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -635,7 +673,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-[#7D5683]"
+            className="text-[#DADFFE]"
           >
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
