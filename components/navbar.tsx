@@ -35,7 +35,7 @@ export default function Navbar() {
       // Set a new timer to show the full menu after 3 seconds of no scrolling
       scrollTimer.current = setTimeout(() => {
         setShowFullMenu(true)
-      }, 3000)
+      }, 20000)
     }
 
     window.addEventListener("scroll", handleScroll, {
@@ -113,7 +113,6 @@ export default function Navbar() {
               Contacto
             </Link>
           </div>
-
           <div className="flex items-center gap-4">
             <div
               className={`hidden md:block transition-opacity duration-300 ${showFullMenu ? "opacity-100" : "opacity-0"}`}
