@@ -347,13 +347,13 @@ export default function PricingPage() {
   const enterpriseFeatures = sortFeaturesByInclusion(standardFeatures, 'enterprise');
 
   return (
-    <div className="min-h-screen bg-[#140E36] text-[#DADFFE] font-sans">
+    <div className="min-h-screen bg-background text-foreground font-sans">
       <TooltipProvider delayDuration={0}>
         {/* Header */}
         <Navbar/>
         <header className="container mx-auto px-4 py-36">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-[#B5C7FF] mb-4">Planes de Precios</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground-secondary mb-4">Planes de Precios</h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
               Soluciones web profesionales diseñadas para impulsar el crecimiento de tu negocio
             </p>
@@ -364,15 +364,15 @@ export default function PricingPage() {
                 value={paymentPlan}
                 onValueChange={(value) => setPaymentPlan(value as "contado" | "3msi" | "6msi" | "9msi" | "12msi")}
               >
-                <SelectTrigger className="w-[200px] text-lg p-6 bg-[#1A1A1A]/30 border-[#7D5683]/30 text-[#DADFFE] focus:ring-[#7D5683]">
+                <SelectTrigger className="w-[200px] text-lg p-6 bg-background-secondary/30 border-accent/30 text-foreground focus:ring-accent">
                   <SelectValue placeholder="Selecciona un plan de pago" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#1A1A1A] border-[#7D5683]/30">
-                  <SelectItem value="12msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Pago a 12 meses</SelectItem>
-                  <SelectItem value="9msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Pago a 9 meses</SelectItem>
-                  <SelectItem value="6msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Pago a 6 meses</SelectItem>
-                  <SelectItem value="3msi" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Pago a 3 meses</SelectItem>
-                  <SelectItem value="contado" className="text-[#DADFFE] text-lg p-3 focus:bg-[#7D5683]/20 focus:text-[#DADFFE]">Pago único</SelectItem>
+                <SelectContent className="bg-background-secondary border-accent/30">
+                  <SelectItem value="12msi" className="text-foreground text-lg p-3 focus:bg-accent/20 focus:text-foreground">Pago a 12 meses</SelectItem>
+                  <SelectItem value="9msi" className="text-foreground text-lg p-3 focus:bg-accent/20 focus:text-foreground">Pago a 9 meses</SelectItem>
+                  <SelectItem value="6msi" className="text-foreground text-lg p-3 focus:bg-accent/20 focus:text-foreground">Pago a 6 meses</SelectItem>
+                  <SelectItem value="3msi" className="text-foreground text-lg p-3 focus:bg-accent/20 focus:text-foreground">Pago a 3 meses</SelectItem>
+                  <SelectItem value="contado" className="text-foreground text-lg p-3 focus:bg-accent/20 focus:text-foreground">Pago único</SelectItem>
                 </SelectContent>
               </Select>
             </div>
