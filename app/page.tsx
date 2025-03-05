@@ -15,6 +15,7 @@ import {
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { Globe, LineChart, Mail, Palette, RefreshCw, Shield } from "lucide-react"
+import CheckoutButton from "@/components/checkout-button"
 
 // Define standard features for all packages
 const standardFeatures = [
@@ -419,9 +420,7 @@ export default function PricingPage() {
                     )}
                   </div>
                 </div>
-                <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
-                  Comenzar
-                </button>
+                <CheckoutButton plan="starter" paymentPlan={paymentPlan as any} />
                 {paymentPlan !== "contado" ? (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
                     Total: ${starterPrice.total} MXN (En {starterPrice.months} pagos)
@@ -478,9 +477,7 @@ export default function PricingPage() {
                     )}
                   </div>
                 </div>
-                <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
-                  Comenzar
-                </button>
+                <CheckoutButton plan="business" paymentPlan={paymentPlan as any} />
                 {paymentPlan !== "contado" ? (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
                     Total: ${businessPrice.total} MXN (En {businessPrice.months} pagos)
@@ -533,9 +530,7 @@ export default function PricingPage() {
                     )}
                   </div>
                 </div>
-                <button className="w-full py-3 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
-                  Comenzar
-                </button>
+                <CheckoutButton plan="enterprise" paymentPlan={paymentPlan as any} />
                 {paymentPlan !== "contado" ? (
                   <p className="text-center text-sm mt-2 text-[#B5C7FF]">
                     Total: ${enterprisePrice.total} MXN (En {enterprisePrice.months} pagos)
