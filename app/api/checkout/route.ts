@@ -36,15 +36,15 @@ const planNames = {
 export async function POST(req: Request) {
   try {
     const { plan, paymentPlan } = await req.json();
-    
+
     // Validar que el plan y método de pago sean válidos
     if (!plan || !paymentPlan || !prices[plan as keyof typeof prices] || !prices[plan as keyof typeof prices][paymentPlan as keyof typeof prices[keyof typeof prices]]) {
       return NextResponse.json({ error: 'Plan o método de pago inválido' }, { status: 400 });
     }
-    
+
     const totalAmount = prices[plan as keyof typeof prices][paymentPlan as keyof typeof prices[keyof typeof prices]];
     const planName = planNames[plan as keyof typeof planNames];
-    
+
     // Configurar metadata para saber qué plan y método de pago se eligió
     const metadata = {
       plan,
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     };
 
     let session;
-    
+
     // Si es pago de contado, usar modo 'payment' (pago único)
     if (paymentPlan === 'contado') {
       session = await stripe.checkout.sessions.create({
@@ -76,26 +76,26 @@ export async function POST(req: Request) {
         cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/#planes`,
         metadata
       });
-    } 
+    }
     // Si es pago a meses, usar modo 'subscription' (suscripción)
     else {
       // Extraer el número de meses del plan de pago
       const months = parseInt(paymentPlan.replace('msi', ''));
-      
+
       // Calcular el precio mensual (dividir el precio total entre el número de meses)
       const monthlyAmount = Math.round(totalAmount / months);
-      
+
       // Crear un producto para esta compra específica
       const product = await stripe.products.create({
         name: planName,
         description: `Servicio web - Plan a ${months} meses sin intereses`,
-        metadata: { 
+        metadata: {
           ...metadata,
           monthlyAmount: monthlyAmount.toString(),
           totalMonths: months.toString()
         }
       });
-      
+
       // Crear un precio recurrente para este producto
       const price = await stripe.prices.create({
         product: product.id,
@@ -108,7 +108,7 @@ export async function POST(req: Request) {
           totalMonths: months.toString()
         }
       });
-      
+
       // Crear sesión de checkout para suscripción con cantidad limitada de pagos
       session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -120,7 +120,6 @@ export async function POST(req: Request) {
         ],
         mode: 'subscription',
         subscription_data: {
-          trial_period_days: 0,
           metadata: {
             totalMonths: months.toString(),
           }
@@ -134,10 +133,10 @@ export async function POST(req: Request) {
         }
       });
     }
-    
+
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error('Error al crear sesión de Stripe:', error);
     return NextResponse.json({ error: 'Error al procesar el pago' }, { status: 500 });
   }
-} 
+}
