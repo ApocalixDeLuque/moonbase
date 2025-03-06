@@ -37,7 +37,7 @@ const getEmailTemplate = (customerName: string, plan: string, amount: number, pa
             <p>En breve nos pondremos en contacto contigo para comenzar a trabajar en tu proyecto. Mientras tanto, si tienes alguna pregunta, no dudes en contactarnos.</p>
             <p>Saludos,<br/>El equipo de Nightly Software</p>
             <div align="center">
-                <img src="https://nightlysoftware.com/NS-Isotipo_color.png" alt="NightlySoftware Isotipo" width="48px" />
+                <img src="https://images.nightlysoftware.com/NS-Isotipo_color.png" alt="NightlySoftware Isotipo" width="48px" />
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <div style="height: 1px; width: 40px; background-color: rgba(125, 86, 131, 0.5);"></div>
                     <p style="color: #7D5683; font-size: 14px;">De noche, creamos el mañana</p>
