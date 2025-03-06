@@ -46,6 +46,15 @@ export async function POST(req: Request) {
           const amount = session.amount_total ? session.amount_total / 100 : 0;
           const paymentMethod = session.payment_method_types?.[0] || 'card';
 
+          //Extraer informacion del plan de pago
+
+          const paymentPlan = session.metadata?.paymentPlan || 'contado';
+          const isMSI = session.metadata?.isMSI === 'true';
+          const msiMonths = parseInt(session.metadata?.msiMonths || '1');
+
+          const paymentPlanText = isMSI
+          ? `${msiMonths} meses sin intereses` : 'Pago único';
+
           // Mapear tipo de plan a nombre legible en español
           const planNames = {
             starter: "Paquete Inicial",
@@ -62,7 +71,8 @@ export async function POST(req: Request) {
               customerName,
               planName,
               amount,
-              paymentMethod === 'card' ? 'Tarjeta' : paymentMethod
+              paymentMethod === 'card' ? 'Tarjeta' : paymentMethod,
+              paymentPlanText
             );
           }
         }
