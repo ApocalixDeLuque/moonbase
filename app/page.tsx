@@ -16,6 +16,7 @@ import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { Globe, LineChart, Mail, Palette, RefreshCw, Shield } from "lucide-react"
 import CheckoutButton from "@/components/checkout-button"
+import ContactButton from "@/components/contact-button";
 
 // Define standard features for all packages
 const standardFeatures = [
@@ -628,13 +629,11 @@ export default function PricingPage() {
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Transforma tu presencia digital con nuestras soluciones web profesionales. Contáctanos hoy para una consulta gratuita y personalizada.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="py-3 px-8 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
-                Contáctanos
-              </button>
-              <button className="py-3 px-8 bg-transparent border border-[#7D5683] text-[#B5C7FF] font-medium rounded-lg hover:bg-[#7D5683]/10 transition-colors">
-                Saber Más
-              </button>
+            <div className="flex flex-col sm:flex-row gap-24 justify-center">
+              <ContactButton/>
+              {/*<button className="py-3 px-8 bg-transparent border border-[#7D5683] text-[#B5C7FF] font-medium rounded-lg hover:bg-[#7D5683]/10 transition-colors">*/}
+              {/*  Saber Más*/}
+              {/*</button>*/}
             </div>
           </div>
         </section>
