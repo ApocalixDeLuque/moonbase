@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Email template with dynamic content
-const getEmailTemplate = (customerName: string, plan: string, amount: number, paymentMethod: string) => {
+const getEmailTemplate = (customerName: string, plan: string, amount: number, paymentMethod: string, paymentPlanText: string) => {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
         <div style="background-color: #7D5683; padding: 20px; text-align: center;">
@@ -32,6 +32,7 @@ const getEmailTemplate = (customerName: string, plan: string, amount: number, pa
                 <p><strong>Plan:</strong> ${plan}</p>
                 <p><strong>Monto:</strong> $${amount.toFixed(2)} MXN</p>
                 <p><strong>Método de pago:</strong> ${paymentMethod}</p>
+                <p><strong>Plan de pago: ${paymentPlanText}</strong></p>
             </div>
             <p>En breve nos pondremos en contacto contigo para comenzar a trabajar en tu proyecto. Mientras tanto, si tienes alguna pregunta, no dudes en contactarnos.</p>
             <p>Saludos,<br/>El equipo de Nightly Software</p>
@@ -56,7 +57,8 @@ export async function sendConfirmationEmail(
   customerName: string,
   plan: string,
   amount: number,
-  paymentMethod: string
+  paymentMethod: string,
+  paymentPlanText: string
 ) {
   try {
     console.log(`Sending confirmation email to ${email}`);
@@ -64,7 +66,7 @@ export async function sendConfirmationEmail(
       from: `"Nightly Software" <${process.env.EMAIL_FROM}>`,
       to: email,
       subject: "Confirmación de Compra - Nightly Software",
-      html: getEmailTemplate(customerName, plan, amount, paymentMethod),
+      html: getEmailTemplate(customerName, plan, amount, paymentMethod, paymentPlanText),
     });
     console.log('Email sent:', result.messageId);
     console.log(`resultado :`, result);
