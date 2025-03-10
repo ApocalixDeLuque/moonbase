@@ -14,7 +14,7 @@ import {
 
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
-import { Globe, LineChart, Mail, Palette, RefreshCw, Shield } from "lucide-react"
+import { Globe, LineChart, Mail, Palette, RefreshCw, Shield, Check as CheckIcon, X as XIcon } from "lucide-react"
 import CheckoutButton from "@/components/checkout-button"
 import ContactButton from "@/components/contact-button";
 
@@ -592,6 +592,135 @@ export default function PricingPage() {
                   <LineChart className="w-6 h-6 text-[#7D5683]" />
                   <span className="text-[#DADFFE]">Tráfico web ilimitado</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Table Section */}
+        <section className="container mx-auto px-4 py-16 pt-24">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#B5C7FF] mb-8 text-center">Comparativa de Planes</h2>
+            <p className="text-center text-lg mb-12 max-w-3xl mx-auto">
+              Compara las características de cada plan para elegir la solución perfecta para tu negocio
+            </p>
+            
+            <div className="overflow-x-auto rounded-2xl shadow-xl shadow-[#6A53FF]/10">
+              <div className="p-0.5 bg-gradient-to-br from-[#6A53FF]/30 via-[#7D5683]/30 to-[#B5C7FF]/20 rounded-2xl">
+                <table className="w-full border-collapse rounded-xl overflow-hidden">
+                  <thead>
+                    <tr>
+                      <th className="p-5 text-left bg-[#1A1A1A]/80 rounded-tl-xl border-b-2 border-[#7D5683]/40">
+                        <div className="font-bold text-xl text-[#B5C7FF]">Características</div>
+                      </th>
+                      <th className="p-5 text-center bg-[#1A1A1A]/80 min-w-[180px] border-b-2 border-[#7D5683]/40">
+                        <div className="font-bold text-xl text-[#B5C7FF]">Inicial</div>
+                        <div className="text-sm mt-2 text-[#DADFFE]/70">Para emprendedores</div>
+                      </th>
+                      <th className="p-5 text-center bg-[#271E40] min-w-[180px] border-b-2 border-[#6A53FF]/60 relative">
+                        <div className="font-bold text-xl text-[#B5C7FF]">Estándar</div>
+                        <div className="text-sm mt-2 text-[#DADFFE]/70">Para negocios</div>
+                      </th>
+                      <th className="p-5 text-center bg-[#1A1A1A]/80 rounded-tr-xl min-w-[180px] border-b-2 border-[#7D5683]/40">
+                        <div className="font-bold text-xl text-[#B5C7FF]">Premium</div>
+                        <div className="text-sm mt-2 text-[#DADFFE]/70">Para empresas</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {standardFeatures.map((feature, index) => (
+                      <tr 
+                        key={feature.feature} 
+                        className={`${index % 2 === 0 ? 'bg-[#1A1A1A]/60' : 'bg-[#1A1A1A]/80'} hover:bg-[#271E40]/40 transition-colors`}
+                      >
+                        <td className="p-4 border-b border-[#7D5683]/20">
+                          <div className="font-medium text-[#B5C7FF]">{feature.feature}</div>
+                          <div className="text-sm text-[#DADFFE]/70 mt-1">{feature.description}</div>
+                        </td>
+                        <td className="p-4 text-center border-b border-[#7D5683]/20">
+                          {feature.included.starter ? (
+                            <div>
+                              {feature.level?.starter ? (
+                                <div className="font-medium text-[#B5C7FF] py-1" dangerouslySetInnerHTML={{ __html: feature.level.starter.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-white">$1</span>') }} />
+                              ) : (
+                                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 mx-auto">
+                                  <CheckIcon className="h-5 w-5 text-green-500" />
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#7D5683]/10 mx-auto">
+                              <XIcon className="h-5 w-5 text-[#7D5683]/50" />
+                            </div>
+                          )}
+                        </td>
+                        <td className="p-4 text-center bg-[#271E40]/60 border-b border-[#6A53FF]/30">
+                          {feature.included.business ? (
+                            <div>
+                              {feature.level?.business ? (
+                                <div className="font-medium text-[#B5C7FF] py-1" dangerouslySetInnerHTML={{ __html: feature.level.business.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-white">$1</span>') }} />
+                              ) : (
+                                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 mx-auto">
+                                  <CheckIcon className="h-5 w-5 text-green-500" />
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#7D5683]/10 mx-auto">
+                              <XIcon className="h-5 w-5 text-[#7D5683]/50" />
+                            </div>
+                          )}
+                        </td>
+                        <td className="p-4 text-center border-b border-[#7D5683]/20">
+                          {feature.included.enterprise ? (
+                            <div>
+                              {feature.level?.enterprise ? (
+                                <div className="font-medium text-[#B5C7FF] py-1" dangerouslySetInnerHTML={{ __html: feature.level.enterprise.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-white">$1</span>') }} />
+                              ) : (
+                                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-500/20 mx-auto">
+                                  <CheckIcon className="h-5 w-5 text-green-500" />
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#7D5683]/10 mx-auto">
+                              <XIcon className="h-5 w-5 text-[#7D5683]/50" />
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td className="p-5 rounded-bl-xl bg-[#1A1A1A]/80 border-t-2 border-[#7D5683]/40"></td>
+                      <td className="p-5 text-center bg-[#1A1A1A]/80 border-t-2 border-[#7D5683]/40">
+                        <button 
+                          className="px-4 py-3 bg-[#6A53FF] text-white rounded-lg shadow-md hover:bg-[#5745d6] transition-colors w-full"
+                          onClick={() => window.location.href = "#starter"}
+                        >
+                          Seleccionar
+                        </button>
+                      </td>
+                      <td className="p-5 text-center bg-[#271E40] border-t-2 border-[#6A53FF]/60">
+                        <button 
+                          className="px-4 py-3 bg-[#6A53FF] text-white rounded-lg shadow-lg shadow-[#6A53FF]/30 hover:bg-[#5745d6] transition-colors w-full"
+                          onClick={() => window.location.href = "#business"}
+                        >
+                          Seleccionar
+                        </button>
+                      </td>
+                      <td className="p-5 text-center bg-[#1A1A1A]/80 rounded-br-xl border-t-2 border-[#7D5683]/40">
+                        <button 
+                          className="px-4 py-3 bg-[#6A53FF] text-white rounded-lg shadow-md hover:bg-[#5745d6] transition-colors w-full"
+                          onClick={() => window.location.href = "#enterprise"}
+                        >
+                          Seleccionar
+                        </button>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
             </div>
           </div>
