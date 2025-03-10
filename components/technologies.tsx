@@ -65,17 +65,17 @@ export default function Technologies() {
     const getCategoryColor = (category: string) => {
         switch (category) {
             case "frontend":
-                return "bg-blue-500 text-white"
+                return "bg-[#B5C7FF] text-[#0D0923]"
             case "backend":
-                return "bg-green-500 text-white"
+                return "bg-[#7D5683] text-white"
             case "cloud":
-                return "bg-purple-500 text-white"
+                return "bg-[#6A53FF] text-white"
             case "ai":
-                return "bg-red-500 text-white"
+                return "bg-[#E86A33] text-white"
             case "devOps":
-                return "bg-amber-500 text-white"
+                return "bg-[#3D8361] text-white"
             default:
-                return "bg-slate-500 text-white"
+                return "bg-[#271E40] text-white"
         }
     }
 
@@ -117,16 +117,18 @@ export default function Technologies() {
     const getCategoryPosition = (category: string, index: number) => {
         const totalCategories = Object.keys(technologies).length;
         
-        // Ajuste: iniciar el ángulo desde arriba (π/2) y distribuir uniformemente
-        // Multiplicar por -1 para ir en sentido horario
+        // Iniciar el ángulo desde arriba (π/2) y distribuir uniformemente en sentido horario
         const angle = -1 * (Math.PI / 2 - (index / totalCategories) * 2 * Math.PI);
         
-        // Aumentar ligeramente el radio para dar más espacio
-        const radius = Math.min(containerSize.width, containerSize.height) * 0.3;
+        // Ajustar el radio para dar más espacio
+        const radius = Math.min(containerSize.width, containerSize.height) * 0.28;
+        
+        // Aplicar un pequeño offset vertical para centrar mejor el mapa
+        const verticalOffset = -30; // Desplazamiento hacia arriba del mapa completo
 
         return {
             x: Math.cos(angle) * radius,
-            y: Math.sin(angle) * radius,
+            y: Math.sin(angle) * radius + verticalOffset,
         };
     };
 
@@ -149,16 +151,20 @@ export default function Technologies() {
             techAngle = categoryAngle - arcAngle/2 + (techIndex / (techsInCategory - 1)) * arcAngle;
         }
         
-        // Ajustar la distancia basada en el número de tecnologías (más tecnologías = más lejos para evitar superposiciones)
-        // Aumentamos gradualmente el radio a medida que aumenta el índice para crear un efecto de "capas"
+        // Ajustar la distancia basada en el número de tecnologías
         const baseRadius = Math.min(containerSize.width, containerSize.height) * 0.15;
-        // Añadir un pequeño offset que incrementa ligeramente con el índice
         const radiusOffset = (techIndex % 2) * (baseRadius * 0.15); 
         const radius = baseRadius + radiusOffset;
 
+        // Aplicar pequeños offsets para mejorar la posición:
+        // - Un offset hacia arriba (reduciendo el valor Y)
+        // - Un offset hacia la izquierda (reduciendo el valor X proporcionalmente al ángulo)
+        const verticalOffset = -10; // Desplazamiento hacia arriba
+        const horizontalOffsetFactor = -0.05; // Factor para desplazamiento hacia la izquierda
+
         return {
-            x: categoryPos.x + Math.cos(techAngle) * radius,
-            y: categoryPos.y + Math.sin(techAngle) * radius,
+            x: categoryPos.x + Math.cos(techAngle) * radius + horizontalOffsetFactor * categoryPos.x,
+            y: categoryPos.y + Math.sin(techAngle) * radius + verticalOffset,
         };
     };
 
@@ -301,6 +307,7 @@ export default function Technologies() {
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
                                 transition={{ duration: 0.5 }}
+                                style={{ marginTop: "-30px" }}
                             >
                                 <div className="w-20 h-20 rounded-full bg-gradient-to-r from-accent to-accent-secondary flex items-center justify-center shadow-lg">
                                     <span className="text-accent-foreground font-bold text-lg">TECH</span>
@@ -329,9 +336,9 @@ export default function Technologies() {
                                                     y1="50%"
                                                     x2={`${((position.x + containerSize.width / 2) / containerSize.width) * 100}%`}
                                                     y2={`${((position.y + containerSize.height / 2) / containerSize.height) * 100}%`}
-                                                    stroke={isActive ? "#DADFFE" : "#7D5683"}
-                                                    strokeWidth={isActive ? "2" : "1.5"}
-                                                    strokeDasharray={isActive ? "" : "5,5"}
+                                                    stroke={isActive ? "#DADFFE" : isActive === false && activeCategory ? "#7D5683/50" : "#7D5683"}
+                                                    strokeWidth={isActive ? "2.5" : "1.5"}
+                                                    strokeDasharray={isActive ? "" : "4,4"}
                                                 />
                                             </svg>
 
@@ -397,7 +404,7 @@ export default function Technologies() {
                                                                         x2={`${((techPosition.x + containerSize.width / 2) / containerSize.width) * 100}%`}
                                                                         y2={`${((techPosition.y + containerSize.height / 2) / containerSize.height) * 100}%`}
                                                                         stroke={isTechActive ? "#DADFFE" : "#7D5683"}
-                                                                        strokeWidth={isTechActive ? "1.5" : "1"}
+                                                                        strokeWidth={isTechActive ? "2" : "1.2"}
                                                                     />
                                                                 </svg>
 
@@ -419,11 +426,13 @@ export default function Technologies() {
                                                                     onClick={() => handleTechClick(tech, category)}
                                                                 >
                                                                     <div
-                                                                        className={`w-8 h-8 rounded-full bg-background-overlay border-2 ${
-                                                                            isTechActive ? "border-accent" : "border-border"
-                                                                        } flex items-center justify-center shadow-sm`}
+                                                                        className={`w-8 h-8 rounded-full ${
+                                                                            isTechActive ? "bg-[#140E36] border-[#B5C7FF]" : "bg-[#1A1A1A]/80 border-[#7D5683]/60"
+                                                                        } border-2 flex items-center justify-center shadow-md transition-all duration-300`}
                                                                     >
-                                                                        <span className="text-xs font-medium text-foreground">{tech.split(".")[0]}</span>
+                                                                        <span className={`text-xs font-medium ${isTechActive ? "text-[#DADFFE]" : "text-[#B5C7FF]"}`}>
+                                                                            {tech.split(".")[0]}
+                                                                        </span>
                                                                     </div>
                                                                 </motion.div>
                                                             </div>
@@ -472,7 +481,7 @@ export default function Technologies() {
                         </div>
 
                         {/* Grid de tecnologías */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[350px] pr-1">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[455px] pr-1 pb-4">
                             <AnimatePresence>
                                 {allTechnologies.map(({ tech, category }) => (
                                     <motion.div
@@ -481,13 +490,15 @@ export default function Technologies() {
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{
                                             opacity: activeTech && activeTech !== tech ? 0.7 : 1,
-                                            scale: activeTech === tech ? 1.02 : 1,
+                                            scale: activeTech === tech ? 1.01 : 1,
                                         }}
                                         exit={{ opacity: 0, scale: 0.8 }}
                                         transition={{ duration: 0.3 }}
-                                        className={`bg-background-secondary rounded-lg shadow-sm overflow-hidden border ${
-                                            activeTech === tech ? "ring-2 ring-accent" : getCardBorderColor(category)
-                                        } hover:shadow-md transition-shadow cursor-pointer`}
+                                        className={`bg-[#1A1A1A]/80 rounded-lg shadow-sm overflow-hidden ${
+                                            activeTech === tech 
+                                            ? "border-[#B5C7FF] border-2" 
+                                            : `border ${getCardBorderColor(category)}`
+                                        } hover:shadow-md transition-all duration-300 cursor-pointer`}
                                         onClick={() => handleTechClick(tech, category)}
                                     >
                                         <div className="p-4">
@@ -500,10 +511,11 @@ export default function Technologies() {
                                                 <h3 className="text-base font-bold text-foreground">{tech}</h3>
                                             </div>
 
-                                            <div
-                                                className={`text-xs ${getCategoryBgColor(category)} inline-flex items-center px-2 py-0.5 rounded-full mb-2`}
-                                            >
-                                                {category.charAt(0).toUpperCase() + category.slice(1)}
+                                            <div className={`text-xs font-medium rounded-full px-2.5 py-1 inline-block mt-3 border border-[#7D5683]/30 ${getCategoryBgColor(category)}`}>
+                                                <div className="flex items-center">
+                                                    <span className="mr-1.5 opacity-90">{getCategoryIcon(category)}</span>
+                                                    <span>{category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                                                </div>
                                             </div>
 
                                             <AnimatePresence>
@@ -513,7 +525,7 @@ export default function Technologies() {
                                                         animate={{ opacity: 1, height: "auto" }}
                                                         exit={{ opacity: 0, height: 0 }}
                                                         transition={{ duration: 0.3 }}
-                                                        className="mt-2 text-sm text-foreground-secondary overflow-hidden"
+                                                        className="mt-2 text-[#DADFFE]/80 text-sm line-clamp-3"
                                                     >
                                                         <p>{getDescription(tech)}</p>
                                                     </motion.div>
@@ -544,7 +556,7 @@ export default function Technologies() {
                         transition={{ duration: 0.3 }}
                     >
                         <h3 className="text-xl font-bold mb-2 text-foreground">{activeTech}</h3>
-                        <p className="text-foreground-secondary">{getDescription(activeTech)}</p>
+                        <p className="text-[#DADFFE]/80 text-sm mt-2 line-clamp-3">{getDescription(activeTech)}</p>
                     </motion.div>
                 )}
             </div>
