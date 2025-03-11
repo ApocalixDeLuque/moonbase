@@ -2,17 +2,45 @@
 
 import { Button } from "@/components/ui/button"
 import dynamic from 'next/dynamic'
+import { useEffect, useState, useRef } from "react"
 
 // Importación dinámica para evitar errores con SSR
 const ThreeScene = dynamic(() => import('@/components/ThreeScene'), { ssr: false })
 
 export default function StarryNightHero() {
+  const [scrollY, setScrollY] = useState(0)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const arrowRef = useRef<SVGSVGElement>(null)
+  
+  // Calculate hero section height for transition effect
+  const getHeroHeight = () => {
+    return heroRef.current?.clientHeight || 0
+  }
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Calculate opacity values based on scroll position
+  const transitionPoint = getHeroHeight() * 0.3 // Start transition at 30% of scroll through hero
+  const transitionLength = getHeroHeight() * 0.3 // Complete transition over 30% of hero height
+  
+  // Calculate opacity for arrow (fade out faster)
+  const arrowOpacity = Math.max(0, 1 - (scrollY / (transitionPoint * 0.7)))
+  
   return (
     <div
+      ref={heroRef}
       className="relative min-h-screen overflow-hidden"
     >
-      {/* La escena 3D reemplaza al canvas */}
-      <ThreeScene />
+      {/* Pass scroll position to ThreeScene */}
+      <ThreeScene scrollY={scrollY} heroHeight={getHeroHeight()} />
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <div className="max-w-3xl space-y-6">
@@ -33,10 +61,15 @@ export default function StarryNightHero() {
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0D0923] to-transparent" />
-
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div 
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+          style={{ 
+            opacity: arrowOpacity,
+            transition: 'opacity 0.2s ease-out' 
+          }}
+        >
           <svg
+            ref={arrowRef}
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"

@@ -524,9 +524,38 @@ function FloatingParticles() {
   )
 }
 
-export default function ThreeScene() {
+export default function ThreeScene({ scrollY = 0, heroHeight = 0 }: { scrollY?: number, heroHeight?: number }) {
+  // Calculate opacity and background transition based on scroll position
+  const transitionPoint = heroHeight * 0.3 // Start transition at 30% of scroll through hero
+  const transitionLength = heroHeight * 0.3 // Complete transition over 30% of hero height
+  
+  // Calculate scene opacity (fade out as scroll increases)
+  const sceneOpacity = Math.max(0, 1 - Math.max(0, (scrollY - transitionPoint) / transitionLength))
+  
+  // Get theme variables
+  const getThemeColor = () => {
+    const root = document.documentElement
+    const theme = root.getAttribute('data-theme') || 'starlit'
+    
+    // Get background color based on current theme
+    if (theme === 'starlit') {
+      return '#140E36' // --background from starlit theme
+    } else {
+      return '#0A0A0D' // --background from midnight theme
+    }
+  }
+  
+  // Calculate background color transition
+  const currentThemeColor = typeof window !== 'undefined' ? getThemeColor() : '#140E36'
+  
   return (
-    <div className="absolute inset-0 z-0">
+    <div 
+      className="absolute inset-0 z-0"
+      style={{ 
+        opacity: sceneOpacity,
+        transition: 'opacity 0.2s ease-out',
+      }}
+    >
       <Canvas
         camera={{ position: [0, 0, 15], fov: 60, near: 0.1, far: 1000 }}
         dpr={[1, 2]}
@@ -538,7 +567,8 @@ export default function ThreeScene() {
           depth: true
         }}
         style={{
-          background: 'linear-gradient(to bottom, #0D0923, #140E36, #271E40)'
+          background: `linear-gradient(to bottom, #0D0923, #140E36, #271E40)`,
+          mixBlendMode: 'normal',
         }}
         shadows
       >
