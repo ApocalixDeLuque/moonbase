@@ -39,26 +39,29 @@ export default function SplineHero() {
       {/* Usamos el nuevo componente MoonSplineScene */}
       <MoonSplineScene scrollY={scrollY} heroHeight={getHeroHeight()} />
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-start min-h-screen px-4 text-center">
         <div className="max-w-3xl space-y-6">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-            Transformamos <span className="text-[#B5C7FF]">ideas</span> en soluciones digitales
-          </h1>
-          <p className="max-w-2xl mx-auto text-xl text-[#DADFFE] md:text-2xl">
-            En Nightly Software, llevamos tu visión al siguiente nivel con desarrollo web y soluciones tecnológicas innovadoras
-          </p>
+          {/* Add a very subtle backdrop blur container for better text readability */}
+          <div className="mt-32 backdrop-blur-sm bg-black/10 rounded-3xl p-8 border border-white/10">
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_60%),_0_0_20px_rgb(0_0_0_/_40%)]">
+              Transformamos <span className="text-[#B5C7FF] drop-shadow-2xl [text-shadow:_2px_2px_4px_rgb(0_0_0_/_60%),_0_0_20px_rgb(0_0_0_/_40%)]">ideas</span> en soluciones digitales
+            </h1>
+            <p className="max-w-2xl mx-auto text-lg text-white/95 drop-shadow-xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_50%),_0_0_15px_rgb(0_0_0_/_30%)] mt-6">
+              En Nightly Software, llevamos tu visión al siguiente nivel con desarrollo web y soluciones tecnológicas innovadoras
+            </p>
+          </div>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Button
               variant="default"
               size="lg"
-              className="bg-[#B5C7FF] text-black hover:bg-[#9DB0FF]"
+              className="bg-[#B5C7FF] text-black hover:bg-[#9DB0FF] shadow-2xl backdrop-blur-sm border border-white/20 font-semibold"
             >
               Nuestros servicios
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-[#DADFFE] text-[#DADFFE] hover:bg-[#DADFFE]/10"
+              className="border-white/40 text-white hover:bg-white/10 backdrop-blur-sm shadow-xl font-semibold [text-shadow:_1px_1px_2px_rgb(0_0_0_/_40%)]"
             >
               Conoce más
             </Button>

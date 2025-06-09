@@ -50,7 +50,7 @@ const MoonSplineScene = ({ scrollY = 0, heroHeight = 0 }) => {
       {/* Contenedor con recorte estratégico para ocultar la marca de agua */}
       <div className="absolute inset-0 overflow-hidden" style={{ height: 'calc(100% + 30px)' }}>
         {/* Posicionamos el componente de manera que la parte inferior derecha quede fuera del área visible */}
-        <div className="absolute inset-0" style={{ marginBottom: '-30px' }}>
+        <div className="absolute inset-0" style={{ marginBottom: '-250px' }}>
           {/* Componente Spline con el modelo 3D */}
           <Spline
             scene="https://prod.spline.design/tl3xShxRq-DfK6sh/scene.splinecode"
