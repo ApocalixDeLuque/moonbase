@@ -1,5 +1,6 @@
 import { Code, Smartphone, Zap, Bot, Database, ShoppingCart } from "lucide-react"
 import TiltedCard from "./tilted-card"
+import AnimateOnScroll from "./AnimateOnScroll"
 
 export default function Services() {
   const services = [
@@ -40,19 +41,19 @@ export default function Services() {
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-[#16213e] to-[#1a1a2e]">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <AnimateOnScroll className="text-center mb-16">
           <div className="inline-block bg-[#B5C7FF]/10 backdrop-blur-sm border border-[#B5C7FF]/20 rounded-full px-4 py-2 mb-6">
             <span className="text-[#B5C7FF] text-sm font-medium">Nuestros Servicios</span>
           </div>
-          <h2 className="text-3xl tracking-tight md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl tracking-tighter md:text-4xl font-bold text-white mb-6">
             ¿Qué podemos hacer por tu empresa?
           </h2>
           <p className="text-xl text-[#DADFFE] max-w-3xl mx-auto">
             Te ayudamos a digitalizar tu negocio con soluciones que realmente funcionan y generan resultados
           </p>
-        </div>
+        </AnimateOnScroll>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <TiltedCard
               key={index}
@@ -86,7 +87,7 @@ export default function Services() {
               }
             />
           ))}
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

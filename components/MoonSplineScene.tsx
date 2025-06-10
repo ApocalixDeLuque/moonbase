@@ -16,7 +16,9 @@ const MoonSplineScene = ({ scrollY = 0, heroHeight = 0 }) => {
   // Calculamos la opacidad basada en el scroll
   const transitionPoint = heroHeight * 0.3;
   const transitionLength = heroHeight * 0.3;
-  const sceneOpacity = Math.max(0, 1 - Math.max(0, (scrollY - transitionPoint) / transitionLength));
+  const sceneOpacity = transitionLength > 0 
+    ? Math.max(0, 1 - Math.max(0, (scrollY - transitionPoint) / transitionLength))
+    : 1;
   
   // Función que se ejecuta cuando el modelo está cargado
   const handleLoad = (spline: SplineObject) => {
@@ -36,17 +38,10 @@ const MoonSplineScene = ({ scrollY = 0, heroHeight = 0 }) => {
     <div 
       className="absolute inset-0 z-0 overflow-hidden"
       style={{ 
-        opacity: sceneOpacity,
-        transition: 'opacity 0.2s ease-out',
+        opacity: isLoading ? 0 : sceneOpacity,
+        transition: 'opacity 0.8s ease-in-out',
       }}
     >
-      {/* Indicador de carga */}
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#573372] z-10">
-          <div className="w-16 h-16 border-t-4 border-[#DADFFE] rounded-full animate-spin"></div>
-        </div>
-      )}
-      
       {/* Contenedor con recorte estratégico para ocultar la marca de agua */}
       <div className="absolute inset-0 overflow-hidden" style={{ height: 'calc(100% + 30px)' }}>
         {/* Posicionamos el componente de manera que la parte inferior derecha quede fuera del área visible */}

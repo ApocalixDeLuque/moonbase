@@ -1,5 +1,6 @@
 import { Rocket, Users, Zap, Shield } from "lucide-react"
 import SpotlightCard from "./spotlight-card"
+import AnimateOnScroll from "./AnimateOnScroll"
 
 export default function About() {
   const benefits = [
@@ -28,19 +29,19 @@ export default function About() {
   return (
     <section className="py-20 px-4 bg-[#140E35]">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <AnimateOnScroll className="text-center mb-16">
           <div className="inline-block bg-[#B5C7FF]/10 backdrop-blur-sm border border-[#B5C7FF]/20 rounded-full px-4 py-2 mb-6">
             <span className="text-[#B5C7FF] text-sm font-medium">¿Por qué elegirnos?</span>
           </div>
-          <h2 className="text-3xl tracking-tight md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl tracking-tighter font-bold text-white mb-6">
             Cómo ayudamos a que tu negocio triunfe
           </h2>
           <p className="text-xl text-[#DADFFE] max-w-3xl mx-auto">
             Transformamos desafíos empresariales en oportunidades digitales con soluciones personalizadas que realmente funcionan
           </p>
-        </div>
+        </AnimateOnScroll>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {benefits.map((benefit, index) => (
             <SpotlightCard
               key={index}
@@ -56,15 +57,16 @@ export default function About() {
               </p>
             </SpotlightCard>
           ))}
-        </div>
+        </AnimateOnScroll>
 
-        {/* <div className="mt-16 text-center">
+        {/* <AnimateOnScroll className="mt-16 text-center">
           <div className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
             <p className="text-lg text-[#DADFFE] leading-relaxed">
+              <span className="text-[#B5C7FF] font-semibold">Empresa mexicana establecida en 2023</span> - 
               Especializados en crear soluciones digitales que transforman negocios y generan resultados reales.
             </p>
           </div>
-        </div> */}
+        </AnimateOnScroll> */}
       </div>
     </section>
   )

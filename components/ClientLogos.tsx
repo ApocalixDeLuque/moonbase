@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import React from "react";
+import AnimateOnScroll from "./AnimateOnScroll";
 
 interface Logo {
   src: string;
@@ -23,41 +24,46 @@ export default function ClientLogos() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-[#140E35] to-[#16213e] overflow-hidden">
+    <section 
+      className="py-16 bg-gradient-to-b from-[#140E35] to-[#16213e] overflow-hidden"
+      style={{ '--bg-from': '#140E35', '--bg-to': '#16213e' } as React.CSSProperties}
+    >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
+        <AnimateOnScroll className="text-center mb-12">
           <h2 className="text-2xl tracking-tight md:text-3xl font-bold text-white mb-4">
             Aliados que confían en nosotros
           </h2>
-        </div>
+        </AnimateOnScroll>
 
-        <div className="relative flex overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-28 before:bg-gradient-to-r before:from-[var(--bg-from)] before:to-transparent before:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-28 after:bg-gradient-to-l after:from-[var(--bg-to)] after:to-transparent after:content-['']">
-          <motion.div
-            className="flex flex-none gap-16 pr-16"
-            initial={{ x: "0" }}
-            animate={{ x: "-50%" }}
-            transition={{
-              ease: 'linear',
-              duration: 25,
-              repeat: Infinity,
-            }}
-          >
-            {[...new Array(2)].fill(0).map((_, index) => (
-              <React.Fragment key={index}>
-                {logos.map((logo) => (
-                  <Image
-                    key={logo.alt}
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={158}
-                    height={48}
-                    className="h-12 w-auto flex-none"
-                  />
-                ))}
-              </React.Fragment>
-            ))}
-          </motion.div>
-        </div>
+        <AnimateOnScroll>
+          <div className="relative flex overflow-hidden">
+            <motion.div
+              className="flex flex-none gap-16 pr-16"
+              initial={{ x: "0" }}
+              animate={{ x: "-50%" }}
+              transition={{
+                ease: 'linear',
+                duration: 25,
+                repeat: Infinity,
+              }}
+            >
+              {[...new Array(2)].fill(0).map((_, index) => (
+                <React.Fragment key={index}>
+                  {logos.map((logo) => (
+                    <Image
+                      key={logo.alt}
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={158}
+                      height={48}
+                      className="h-12 w-auto flex-none"
+                    />
+                  ))}
+                </React.Fragment>
+              ))}
+            </motion.div>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );
