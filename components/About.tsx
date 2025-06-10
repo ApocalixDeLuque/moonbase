@@ -32,7 +32,7 @@ export default function About() {
           <div className="inline-block bg-[#B5C7FF]/10 backdrop-blur-sm border border-[#B5C7FF]/20 rounded-full px-4 py-2 mb-6">
             <span className="text-[#B5C7FF] text-sm font-medium">¿Por qué elegirnos?</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl tracking-tight md:text-4xl font-bold text-white mb-6">
             Cómo ayudamos a que tu negocio triunfe
           </h2>
           <p className="text-xl text-[#DADFFE] max-w-3xl mx-auto">
@@ -58,13 +58,13 @@ export default function About() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <div className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-8 max-w-4xl mx-auto">
             <p className="text-lg text-[#DADFFE] leading-relaxed">
               Especializados en crear soluciones digitales que transforman negocios y generan resultados reales.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )

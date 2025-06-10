@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
+import { motion } from "framer-motion";
+import React from "react";
 
 interface Logo {
   src: string;
@@ -21,52 +22,43 @@ export default function ClientLogos() {
     { src: "/logos/amazon.png", alt: "Amazon" },
   ];
 
-  // Duplicate the logos for a seamless scroll effect
-  const extendedLogos = [...logos, ...logos];
-
   return (
-    <section className="py-16 bg-[#140E35] overflow-hidden">
+    <section className="py-16 bg-gradient-to-b from-[#140E35] to-[#16213e] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Empresas que confían en nosotros
+          <h2 className="text-2xl tracking-tight md:text-3xl font-bold text-white mb-4">
+            Aliados que confían en nosotros
           </h2>
-          <p className="text-[#DADFFE] max-w-2xl mx-auto">
-            Hemos ayudado a empresas de todos los tamaños a transformar sus negocios digitalmente
-          </p>
         </div>
 
-        <div 
-          className="w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
-        >
-          <div className="flex animate-logo-scroll">
-            {extendedLogos.map((logo, index) => (
-              <div key={index} className="flex-shrink-0 mx-8">
-                <Image 
-                  src={logo.src} 
-                  alt={logo.alt} 
-                  width={158} 
-                  height={48} 
-                  className="h-12 w-auto object-contain"
-                />
-              </div>
+        <div className="relative flex overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-28 before:bg-gradient-to-r before:from-[var(--bg-from)] before:to-transparent before:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-28 after:bg-gradient-to-l after:from-[var(--bg-to)] after:to-transparent after:content-['']">
+          <motion.div
+            className="flex flex-none gap-16 pr-16"
+            initial={{ x: "0" }}
+            animate={{ x: "-50%" }}
+            transition={{
+              ease: 'linear',
+              duration: 25,
+              repeat: Infinity,
+            }}
+          >
+            {[...new Array(2)].fill(0).map((_, index) => (
+              <React.Fragment key={index}>
+                {logos.map((logo) => (
+                  <Image
+                    key={logo.alt}
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={158}
+                    height={48}
+                    className="h-12 w-auto flex-none"
+                  />
+                ))}
+              </React.Fragment>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
-      <style jsx>{`
-        @keyframes logo-scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-        .animate-logo-scroll {
-          display: flex;
-          animation: logo-scroll 40s linear infinite;
-        }
-        .animate-logo-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
-  )
-} 
+  );
+}

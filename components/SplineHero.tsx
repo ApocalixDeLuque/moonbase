@@ -90,6 +90,9 @@ export default function SplineHero() {
           </svg>
         </div>
       </div>
+
+      {/* Gradient overlay to blend with the section below */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#140E35] to-transparent z-[5] pointer-events-none" />
     </div>
   )
 }
