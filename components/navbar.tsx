@@ -97,13 +97,13 @@ export default function Navbar() {
               showFullMenu ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/landing2" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
             <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
             <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">

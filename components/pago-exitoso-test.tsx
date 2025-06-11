@@ -77,9 +77,9 @@ function PagoExitosoContent() {
 
 export default function PagoExitosoPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="bg-background text-foreground flex flex-col">
       <Navbar />
-      <main className="flex-grow flex items-center justify-center p-4">
+      <main className="min-h-screen flex-grow flex items-center justify-center p-4">
         <Suspense fallback={<div>Loading...</div>}>
           <PagoExitosoContent />
         </Suspense>

@@ -3,7 +3,7 @@ import ThemeSelector from "./theme-selector"
 
 export default function Footer() {
     return (
-        <footer className="bg-[#0D0923] py-12 mt-12">
+        <footer className="bg-[#0D0923] py-12">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-6 md:mb-0">
