@@ -1,91 +1,91 @@
-import { Store, Briefcase, Factory, MapPin } from "lucide-react"
+import { Building, Dna, HeartPulse, LandPlot, Store, Factory } from "lucide-react"
+import ChromaGrid from "./chroma-grid"
 
 export default function Industries() {
   const industries = [
     {
       icon: Store,
       title: "Retail y E-commerce",
-      description: "Plataformas de comercio electrónico robustas que impulsan las ventas en línea",
-      examples: ["Tiendas en línea", "Sistemas de inventario", "Pasarelas de pago"]
+      description: "Soluciones de e-commerce y punto de venta para optimizar inventario, ventas y la experiencia de compra de tus clientes.",
+      image: "https://images.unsplash.com/photo-1726607424623-6d9fee974241?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      borderColor: "#3B82F6",
+      gradient: "linear-gradient(145deg, #3B82F6, #1a1a2e)",
     },
     {
-      icon: Briefcase,
+      icon: Building,
       title: "Servicios Profesionales",
-      description: "Soluciones digitales para consultorías, bufetes y empresas de servicios",
-      examples: ["Portales de clientes", "Sistemas de citas", "Automatización de procesos"]
+      description: "Plataformas digitales para agencias, consultorías y firmas legales que mejoran la gestión de clientes y servicios.",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #1a1a2e)",
     },
     {
       icon: Factory,
       title: "Manufactura",
-      description: "Sistemas de gestión y control de producción para la industria manufacturera",
-      examples: ["Control de producción", "Gestión de calidad", "Logística integrada"]
+      description: "Software de gestión para producción y logística. Aumenta la eficiencia y reduce costos operativos en plantas industriales.",
+      image: "https://images.unsplash.com/photo-1581091212911-f4efc3f71c48?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      borderColor: "#F97316",
+      gradient: "linear-gradient(145deg, #F97316, #1a1a2e)",
     },
     {
-      icon: MapPin,
+      icon: HeartPulse,
+      title: "Salud y Bienestar",
+      description: "Aplicaciones para clínicas y profesionales de la salud. Optimizamos la gestión de citas y la calidad de atención al paciente.",
+      image: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=2688&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      borderColor: "#6366F1",
+      gradient: "linear-gradient(180deg, #6366F1, #1a1a2e)",
+    },
+    {
+      icon: LandPlot,
+      title: "Inmobiliaria",
+      description: "Plataformas para la gestión de propiedades. Simplificamos la venta, alquiler y administración de tus bienes raíces.",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2873&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      borderColor: "#EC4899",
+      gradient: "linear-gradient(145deg, #EC4899, #1a1a2e)",
+    },
+    {
+      icon: Dna,
       title: "Negocios Locales",
-      description: "Presencia digital sólida para empresas locales que buscan crecer",
-      examples: ["Sitios web corporativos", "Sistemas de reservas", "Marketing digital"]
+      description: "Soluciones digitales para negocios locales. Digitalizamos operaciones para restaurantes, salones y más, impulsando su crecimiento.",
+      image: "https://images.unsplash.com/photo-1728044849221-851cf8587fac?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      borderColor: "#FBBF24",
+      gradient: "linear-gradient(180deg, #FBBF24, #1a1a2e)",
     }
   ]
 
+  const items = industries.map(industry => ({
+    image: industry.image,
+    title: industry.title,
+    subtitle: industry.description,
+    borderColor: industry.borderColor,
+    gradient: industry.gradient,
+    url: "#",
+    Icon: industry.icon,
+  }));
+
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-[#16213e] to-[#1a1a2e]">
+    <section className="py-20 px-4 bg-gradient-to-b from-[#16213e] to-[#1a1a2e] overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-block bg-[#B5C7FF]/10 backdrop-blur-sm border border-[#B5C7FF]/20 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#B5C7FF] text-sm font-medium">Sectores que Atendemos</span>
+            <span className="text-[#B5C7FF] text-sm font-medium">Industrias que Servimos</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ayudamos empresas de todos los rubros
+          <h2 className="text-3xl tracking-tighter md:text-4xl font-bold text-white mb-6">
+            Soluciones a la medida de tu sector
           </h2>
-          <p className="text-xl text-[#DADFFE] max-w-3xl mx-auto">
-            Tenemos experiencia trabajando con diferentes tipos de negocios y sabemos lo que cada uno necesita
+          <p className="text-xl text-[#DADFFE] max-w-4xl mx-auto leading-relaxed">
+            Hemos trabajado con una amplia gama de industrias, adaptando nuestras soluciones para satisfacer las necesidades específicas de cada una.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {industries.map((industry, index) => (
-            <div
-              key={index}
-              className="group bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-black/30 transition-all duration-300 hover:border-[#B5C7FF]/30"
-            >
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="p-4 bg-[#B5C7FF]/20 rounded-xl group-hover:bg-[#B5C7FF]/30 transition-colors flex-shrink-0">
-                  <industry.icon className="w-8 h-8 text-[#B5C7FF]" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{industry.title}</h3>
-                  <p className="text-[#DADFFE] leading-relaxed">{industry.description}</p>
-                </div>
-              </div>
-              
-              <div className="pl-20">
-                <h4 className="text-lg font-semibold text-[#B5C7FF] mb-3">Soluciones Implementadas:</h4>
-                <ul className="space-y-2">
-                  {industry.examples.map((example, exampleIndex) => (
-                    <li key={exampleIndex} className="text-[#DADFFE] flex items-center">
-                      <div className="w-2 h-2 bg-[#B5C7FF] rounded-full mr-3 flex-shrink-0"></div>
-                      {example}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
+          <ChromaGrid 
+            items={items}
+            radius={350}
+            damping={0.4}
+            fadeOut={0.2}
+            ease="power3.out"
+          />
 
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-[#B5C7FF]/10 to-[#DADFFE]/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              ¿Tu Industria No Está Listada?
-            </h3>
-            <p className="text-lg text-[#DADFFE] leading-relaxed max-w-3xl mx-auto">
-              No te preocupes. Nuestra experiencia en desarrollo personalizado nos permite 
-              adaptarnos rápidamente a las necesidades específicas de cualquier sector. 
-              Cada industria tiene sus propios desafíos, y nosotros tenemos las soluciones.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   )
