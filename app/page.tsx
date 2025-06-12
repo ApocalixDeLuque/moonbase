@@ -12,18 +12,18 @@ import CTA from "@/components/CTA"
 import ClientLogos from "@/components/ClientLogos"
 
 export default function Landing2Page() {
-    return (
-        <div>
-            <Navbar />
-            <SplineHero />
-            <About />
-            <ClientLogos />
-            <Services />
-            <Philosophy />
-            <Industries />
-            {/* <Technologies /> */}
-            <CTA />
-            <Footer />
-        </div>
-    )
+  return (
+    <div>
+        <Navbar />
+        <SplineHero />
+        <About />
+        <ClientLogos />
+        <Services />
+        <Philosophy />
+        <Industries />
+        {/* <Technologies /> */}
+        <CTA />
+        <Footer />
+      </div>
+   )
 }
