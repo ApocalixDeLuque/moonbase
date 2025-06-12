@@ -1,6 +1,7 @@
 import type { SpringOptions } from "framer-motion";
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 interface TiltedCardProps {
   imageSrc: React.ComponentProps<"img">["src"];
@@ -39,6 +40,9 @@ export default function TiltedCard({
   overlayContent = null,
   displayOverlayContent = false,
 }: TiltedCardProps) {
+  const { width } = useWindowSize();
+  const isMobile = width ? width < 768 : false; // Disable effects on mobile (< 768px)
+  
   const ref = useRef<HTMLElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const x = useMotionValue(0);
@@ -56,7 +60,7 @@ export default function TiltedCard({
   const [lastY, setLastY] = useState(0);
 
   function handleMouse(e: React.MouseEvent<HTMLElement>) {
-    if (!ref.current) return;
+    if (isMobile || !ref.current) return; // Disable on mobile
 
     const rect = ref.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left - rect.width / 2;
@@ -77,12 +81,14 @@ export default function TiltedCard({
   }
 
   function handleMouseEnter() {
+    if (isMobile) return; // Disable on mobile
     setIsHovered(true);
     scale.set(scaleOnHover);
     opacity.set(1);
   }
 
   function handleMouseLeave() {
+    if (isMobile) return; // Disable on mobile
     setIsHovered(false);
     opacity.set(0);
     scale.set(1);
@@ -100,9 +106,9 @@ export default function TiltedCard({
         width: containerWidth,
         zIndex: isHovered ? 10 : 0,
       }}
-      onMouseMove={handleMouse}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={isMobile ? undefined : handleMouse}
+      onMouseEnter={isMobile ? undefined : handleMouseEnter}
+      onMouseLeave={isMobile ? undefined : handleMouseLeave}
       transition={{ duration: 0.3 }}
     >
       {showMobileWarning && (

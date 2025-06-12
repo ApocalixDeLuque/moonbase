@@ -1,7 +1,12 @@
 import { Building, Dna, HeartPulse, LandPlot, Store, Factory } from "lucide-react"
+import { useWindowSize } from "@uidotdev/usehooks"
 import ChromaGrid from "./chroma-grid"
 
 export default function Industries() {
+  const { width } = useWindowSize()
+  const isMobile = width ? width < 768 : false // Disable animations on mobile (< 768px)
+
+  // Empty array - no mock data
   const industries = [
     {
       icon: Store,
@@ -78,13 +83,21 @@ export default function Industries() {
           </p>
         </div>
 
+        {items.length > 0 ? (
           <ChromaGrid 
             items={items}
-            radius={350}
-            damping={0.4}
-            fadeOut={0.2}
+            radius={isMobile ? 0 : 350} // Disable radius effect on mobile
+            damping={isMobile ? 0 : 0.4} // Disable damping animation on mobile
+            fadeOut={isMobile ? 0 : 0.2} // Disable fade animation on mobile
             ease="power3.out"
           />
+        ) : (
+          <div className="text-center py-16">
+            <p className="text-[#DADFFE]/70 text-lg">
+              No hay datos de industrias disponibles en este momento.
+            </p>
+          </div>
+        )}
 
       </div>
     </section>

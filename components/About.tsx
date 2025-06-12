@@ -45,10 +45,10 @@ export default function About() {
           {benefits.map((benefit, index) => (
             <SpotlightCard
               key={index}
-              className="text-center p-6 backdrop-blur-sm !bg-black/10 !border-white/10"
+              className="flex flex-col text-center p-6 backdrop-blur-sm !bg-black/10 !border-white/10"
               spotlightColor="rgba(181, 199, 255, 0.15)"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#B5C7FF]/20 to-[#B5C7FF]/10 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="inline-flex md:self-center items-center justify-center w-12 h-12 bg-gradient-to-br from-[#B5C7FF]/20 to-[#B5C7FF]/10 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 <benefit.icon className="w-6 h-6 text-[#B5C7FF]" />
               </div>
               <p className="text-lg text-start leading-tight font-bold text-white mb-3">{benefit.title}</p>
