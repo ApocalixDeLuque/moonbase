@@ -151,7 +151,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
       ref={rootRef}
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
-      className={`relative w-fit max-w-full h-fit flex flex-wrap justify-center items-start gap-4 px-8 py-12 border border-white/10 rounded-3xl overflow-hidden ${className}`}
+      className={`relative w-full max-w-full h-fit grid grid-cols-2 lg:grid-cols-3 gap-4 p-4 border border-white/10 rounded-3xl overflow-hidden ${className}`}
       style={
         {
           "--r": `${radius}px`,
@@ -165,7 +165,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           key={i}
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative flex flex-col w-[300px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer rounded-[20px]"
+          className="group relative flex flex-col max-w-[300px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer rounded-[20px]"
           style={
             {
               "--card-border": c.borderColor || "transparent",
@@ -192,17 +192,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           </div>
           <footer className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1">
             <h3 className={`m-0 text-[1.05rem] font-semibold ${!c.handle && "col-span-2"}`}>{c.title}</h3>
-            {c.handle && (
-              <span className="text-[0.95rem] opacity-80 text-right">
-                {c.handle}
-              </span>
-            )}
             <p className="m-0 text-[0.85rem] opacity-85 col-span-2">{c.subtitle}</p>
-            {c.location && (
-              <span className="text-[0.85rem] opacity-85 text-right col-span-2">
-                {c.location}
-              </span>
-            )}
           </footer>
         </article>
       ))}

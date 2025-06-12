@@ -44,24 +44,24 @@ export default function Philosophy() {
             </p>
           </div>
 
-          <div className="relative h-[450px]">
+          <div className="relative h-[450px] max-[768px]:h-[300px] max-[480px]:h-[250px] overflow-hidden">
             <CardSwap
-              width={500}
-              height={240}
-              cardDistance={60}
-              verticalDistance={70}
+              width={320}
+              height={200}
+              cardDistance={40}
+              verticalDistance={50}
               delay={5000}
               pauseOnHover={true}
             >
               {principles.map((principle, index) => (
-                <Card key={index} customClass="p-8 bg-slate-900/50 backdrop-blur-md border-[#B5C7FF]/20 rounded-2xl">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-[#B5C7FF]/20 rounded-lg flex-shrink-0">
-                      <principle.icon className="w-6 h-6 text-[#B5C7FF]" />
+                <Card key={index} customClass="p-5 bg-slate-900/50 backdrop-blur-md border-[#B5C7FF]/20 rounded-2xl">
+                  <div className="flex items-start space-x-3">
+                    <div className="p-2 bg-[#B5C7FF]/20 rounded-lg flex-shrink-0">
+                      <principle.icon className="w-5 h-5 text-[#B5C7FF]" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-3">{principle.title}</h3>
-                      <p className="text-[#DADFFE] leading-relaxed">{principle.description}</p>
+                      <h3 className="text-lg font-bold text-white mb-2">{principle.title}</h3>
+                      <p className="text-sm text-[#DADFFE] leading-relaxed">{principle.description}</p>
                     </div>
                   </div>
                 </Card>
