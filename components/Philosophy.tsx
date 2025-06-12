@@ -70,17 +70,15 @@ export default function Philosophy() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-[#B5C7FF]/10 to-[#DADFFE]/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12">
-          <div className="text-center">
-            <h3 className="text-2xl tracking-tighter md:text-3xl font-bold text-white mb-6">
-              Nuestro Compromiso Contigo
-            </h3>
-            <p className="text-lg text-[#DADFFE] leading-relaxed max-w-4xl mx-auto">
-              Te acompañamos desde la idea inicial hasta el lanzamiento y más allá. Mantenemos comunicación 
-              clara en todo momento, te damos soporte continuo y actualizamos tu solución para que siempre 
-              esté al día con las últimas tecnologías.
-            </p>
-          </div>
+        <div className="bg-gradient-to-r from-[#B5C7FF]/10 to-[#DADFFE]/5 backdrop-blur-sm border border-white/10 rounded-3xl p-4 py-8 md:p-8">
+          <h3 className="text-2xl text-center tracking-tighter md:text-3xl font-bold text-white mb-2 md:mb-6">
+            Nuestro Compromiso Contigo
+          </h3>
+          <p className="text-lg text-[#DADFFE] leading-relaxed max-w-4xl mx-auto">
+            Te acompañamos desde la idea inicial hasta el lanzamiento y más allá. Mantenemos comunicación 
+            clara en todo momento, te damos soporte continuo y actualizamos tu solución para que siempre 
+            esté al día con las últimas tecnologías.
+          </p>
         </div>
       </div>
     </section>

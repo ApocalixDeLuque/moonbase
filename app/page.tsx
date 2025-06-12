@@ -1,6 +1,6 @@
 "use client"
 
-import Technologies from "@/components/technologies"
+// import Technologies from "@/components/technologies"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import SplineHero from "@/components/SplineHero"
@@ -11,7 +11,7 @@ import Industries from "@/components/Industries"
 import CTA from "@/components/CTA"
 import ClientLogos from "@/components/ClientLogos"
 
-export default function Landing2Page() {
+export default function LandingPage() {
   return (
     <div>
       <Navbar />

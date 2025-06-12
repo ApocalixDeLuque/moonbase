@@ -3,6 +3,7 @@ import TiltedCard from "./tilted-card"
 import AnimateOnScroll from "./AnimateOnScroll"
 
 export default function Services() {
+
   const services = [
     {
       icon: Code,
@@ -53,7 +54,7 @@ export default function Services() {
           </p>
         </AnimateOnScroll>
 
-        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-8 p-4 md:p-8">
           {services.map((service, index) => (
             <TiltedCard
               key={index}
@@ -66,7 +67,7 @@ export default function Services() {
               displayOverlayContent={true}
               overlayContent={
                 <div 
-                  className="flex flex-col group bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 h-full overflow-hidden"
+                  className="flex flex-col group bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 py-8 h-fit md:h-full md:p-8 overflow-hidden"
                   style={{
                     backgroundImage: `url(/backgrounds/nightly_background.png)`,
                     backgroundSize: 'cover',
@@ -80,7 +81,7 @@ export default function Services() {
                     <h3 className="text-xl font-bold text-white">{service.title}</h3>
                   </div>
                   
-                  <p className="text-gray-300 leading-relaxed text-base flex-grow">
+                  <p className="text-gray-300 leading-relaxed text-base h-fit">
                     {service.description}
                   </p>
                 </div>

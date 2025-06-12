@@ -1,8 +1,26 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, MessageCircle, Mail, Sparkles, Zap, Star, Rocket, Search, Palette, Code, Rocket as RocketLaunch } from "lucide-react"
+import { useWindowSize } from "@uidotdev/usehooks"
 import Carousel from "./carrousel"
 
 export default function CTA() {
+  const { width } = useWindowSize()
+  
+  // Calculate responsive carousel width
+  const getCarouselWidth = () => {
+    if (!width) return 450 // Default fallback
+    
+    if (width < 640) { // sm breakpoint
+      return Math.min(width - 32, 320) // Account for padding, max 320px
+    } else if (width < 768) { // md breakpoint
+      return Math.min(width - 64, 380) // Account for padding, max 380px
+    } else if (width < 1024) { // lg breakpoint
+      return Math.min(width - 96, 420) // Account for padding, max 420px
+    }
+    
+    return 450 // Full size for larger screens
+  }
+
   const processSteps = [
     {
       title: "Análisis y Descubrimiento",
@@ -87,7 +105,7 @@ export default function CTA() {
           <div className="flex justify-center">
             <Carousel
               items={processSteps}
-              baseWidth={450}
+              baseWidth={getCarouselWidth()}
               autoplay={true}
               autoplayDelay={5000}
               pauseOnHover={true}
@@ -98,7 +116,7 @@ export default function CTA() {
         </div>
 
         {/* Bottom section - Redesigned cards */}
-        <div className="bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+        <div className="bg-gradient-to-r from-black/40 to-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-4 py-8 md:p-8">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-[#B5C7FF] mb-3 flex items-center justify-center gap-2">
               <Zap className="w-6 h-6" />
@@ -110,10 +128,10 @@ export default function CTA() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-[#B5C7FF]/20 to-transparent rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative bg-black/30 border border-white/10 rounded-xl p-6 hover:border-[#B5C7FF]/30 transition-all">
+              <div className="relative bg-black/30 border border-white/10 rounded-xl p-4 md:p-6 hover:border-[#B5C7FF]/30 transition-all">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-[#B5C7FF]/20 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Sparkles className="w-5 h-5 text-[#B5C7FF]" />
@@ -130,7 +148,7 @@ export default function CTA() {
 
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-[#DADFFE]/20 to-transparent rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative bg-black/30 border border-white/10 rounded-xl p-6 hover:border-[#DADFFE]/30 transition-all">
+              <div className="relative bg-black/30 border border-white/10 rounded-xl p-4 md:p-6 hover:border-[#DADFFE]/30 transition-all">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-[#DADFFE]/20 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Zap className="w-5 h-5 text-[#DADFFE]" />
