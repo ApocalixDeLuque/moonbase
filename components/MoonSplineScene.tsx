@@ -59,7 +59,7 @@ const MoonSplineScene = ({ scrollY = 0, heroHeight = 0 }) => {
       </div>
       
       {/* Capa adicional para bloquear cualquier interacción con la marca de agua */}
-      <div className="absolute bottom-0 right-0 w-32 h-16 bg-transparent z-20"></div>
+      <div className="absolute bottom-0 right-0 w-32 h-16 bg-transparent z-20"/>
     </div>
   );
 };

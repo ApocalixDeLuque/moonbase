@@ -234,7 +234,7 @@ import React, {
     return (
       <div
         ref={container}
-        className="absolute bottom-0 right-0 transform translate-x-[5%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:scale-[0.55]"
+        className="absolute bottom-3 right-0 md:right-24 transform translate-x-[5%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[-50%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[-40%] max-[480px]:scale-[0.65]"
         style={{ width, height }}
       >
         {rendered}

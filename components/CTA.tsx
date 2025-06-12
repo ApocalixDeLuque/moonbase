@@ -34,7 +34,7 @@ export default function CTA() {
     <section className="py-20 px-4 bg-gradient-to-b from-[#1a1a2e] to-[#0f0f23] relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Main split layout */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center lg:items-end mb-16">
           {/* Left side - Content */}
           <div className="text-left space-y-6">
             <div className="inline-flex items-center gap-2 bg-[#B5C7FF]/10 border border-[#B5C7FF]/20 rounded-full px-4 py-2">
@@ -84,25 +84,16 @@ export default function CTA() {
           </div>
 
           {/* Right side - Process Carousel */}
-          <div className="relative">
-            <div className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-3 h-3 bg-[#B5C7FF] rounded-full"></div>
-                <div className="text-[#B5C7FF] font-medium text-lg">Nuestro proceso</div>
-              </div>
-              
-              <div className="flex justify-center">
-                <Carousel
-                  items={processSteps}
-                  baseWidth={320}
-                  autoplay={true}
-                  autoplayDelay={4000}
-                  pauseOnHover={true}
-                  loop={true}
-                  round={false}
-                />
-              </div>
-            </div>
+          <div className="flex justify-center">
+            <Carousel
+              items={processSteps}
+              baseWidth={450}
+              autoplay={true}
+              autoplayDelay={5000}
+              pauseOnHover={true}
+              loop={true}
+              round={false}
+            />
           </div>
         </div>
 

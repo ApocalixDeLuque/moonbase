@@ -53,7 +53,7 @@ export default function Services() {
           </p>
         </AnimateOnScroll>
 
-        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
           {services.map((service, index) => (
             <TiltedCard
               key={index}

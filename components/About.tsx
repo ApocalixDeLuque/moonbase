@@ -41,7 +41,7 @@ export default function About() {
           </p>
         </AnimateOnScroll>
 
-        <AnimateOnScroll className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <AnimateOnScroll className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4">
           {benefits.map((benefit, index) => (
             <SpotlightCard
               key={index}

@@ -97,19 +97,19 @@ export default function Navbar() {
               showFullMenu ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
-            <Link href="/landing2" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/services" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
             </Link>
-            <Link href="/" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/pricing" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/portfolio" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Portafolio
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/contact" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Contacto
             </Link>
           </div>
@@ -136,19 +136,19 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-col space-y-4">
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/services" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/pricing" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/portfolio" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Portafolio
             </Link>
-            <Link href="#" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            <Link href="/contact" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Contacto
             </Link>
             <button className="py-2 px-4 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors w-full">
