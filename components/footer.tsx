@@ -57,7 +57,7 @@ export default function Footer() {
                                 Contacto
                             </a>
                         </div>
-                        <ThemeSelector />
+                        {/* <ThemeSelector /> */}
                     </div>
                 </div>
                 <div className="border-t border-[#7D5683]/20 mt-8 pt-8 text-center text-[#DADFFE]/50 text-sm">

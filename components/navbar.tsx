@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
-import ThemeSelector from "./theme-selector"
 
 export default function Navbar() {
   // Initialize showFullMenu as true so the full logo shows on page load
@@ -100,23 +99,30 @@ export default function Navbar() {
             <Link href="/" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
-            <Link href="/services" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            {/* <Link href="/services" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
-            </Link>
+            </Link> */}
             <Link href="/pricing" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
-            <Link href="/portfolio" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            {/* <Link href="/portfolio" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Portafolio
-            </Link>
-            <Link href="/contact" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            </Link> */}
+            {/* <Link href="/contact" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Contacto
-            </Link>
+            </Link> */}
           </div>
           <div className="flex items-center gap-4">
             {/* Botón de Cotizar siempre visible */}
             <div className="hidden md:block">
-              <button className="py-2 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors">
+              <button 
+                className="py-2 px-4 bg-[#7D5683] text-white font-medium rounded-lg hover:bg-[#7D5683]/90 transition-colors"
+                onClick={() => {
+                  const message = "¡Hola! Me interesa iniciar un proyecto de desarrollo de software con Nightly Software. Me gustaría conocer más sobre sus servicios y cómo pueden ayudarme a transformar mi negocio digitalmente.";
+                  const whatsappUrl = `https://wa.me/524621111154?text=${encodeURIComponent(message)}`;
+                  window.open(whatsappUrl, '_blank');
+                }}
+              >
                 Cotizar Proyecto
               </button>
             </div>
@@ -139,19 +145,26 @@ export default function Navbar() {
             <Link href="/" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Inicio
             </Link>
-            <Link href="/services" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            {/* <Link href="/services" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Servicios
-            </Link>
+            </Link> */}
             <Link href="/pricing" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Precios
             </Link>
-            <Link href="/portfolio" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            {/* <Link href="/portfolio" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Portafolio
-            </Link>
-            <Link href="/contact" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
+            </Link> */}
+            {/* <Link href="/contact" className="text-foreground hover:text-foreground-secondary font-medium transition-colors">
               Contacto
-            </Link>
-            <button className="py-2 px-4 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors w-full">
+            </Link> */}
+            <button 
+              className="py-2 px-4 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-colors w-full"
+              onClick={() => {
+                const message = "¡Hola! Me interesa iniciar un proyecto de desarrollo de software con Nightly Software. Me gustaría conocer más sobre sus servicios y cómo pueden ayudarme a transformar mi negocio digitalmente.";
+                const whatsappUrl = `https://wa.me/524621111154?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
               Cotizar Proyecto
             </button>
           </div>
